@@ -1,15 +1,19 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { PlayCircle, FileText, BarChart3, PieChart, TrendingUp } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PlayCircle, FileText, BarChart3, PieChart, TrendingUp, Eye } from "lucide-react";
 import { DisclosureReport } from "@/components/reports/DisclosureReport";
+import { SensitivityAnalysisReport } from "@/components/reports/SensitivityAnalysisReport";
+import { MaturityProfileReport } from "@/components/reports/MaturityProfileReport";
+import { OtherComprehensiveReport } from "@/components/reports/OtherComprehensiveReport";
 
 const Index = () => {
   const [showOutput, setShowOutput] = useState(false);
   const [selectedReport, setSelectedReport] = useState<string>("");
+  const [activeTab, setActiveTab] = useState("disclosure");
   const [formData, setFormData] = useState({
     config: "",
     dataset: "",
@@ -53,46 +57,55 @@ const Index = () => {
               >
                 Back to listing
               </Button>
+              <Button 
+                variant="outline"
+                className="bg-white hover:bg-slate-50"
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                View Old Output
+              </Button>
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                 Export
               </Button>
             </div>
           </div>
           
-          {selectedReport === "disclosure" && <DisclosureReport />}
-          {selectedReport === "sensitivity" && (
-            <Card className="bg-white">
-              <CardContent className="p-8">
-                <div className="text-center text-slate-600">
-                  <BarChart3 className="h-16 w-16 mx-auto mb-4 text-slate-400" />
-                  <h3 className="text-xl font-semibold mb-2">Sensitivity Analysis Report</h3>
-                  <p>This report will show parameter sensitivity analysis.</p>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-          {selectedReport === "maturity" && (
-            <Card className="bg-white">
-              <CardContent className="p-8">
-                <div className="text-center text-slate-600">
-                  <TrendingUp className="h-16 w-16 mx-auto mb-4 text-slate-400" />
-                  <h3 className="text-xl font-semibold mb-2">Maturity Profile Report</h3>
-                  <p>This report will show cash flow maturity analysis.</p>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-          {selectedReport === "comprehensive" && (
-            <Card className="bg-white">
-              <CardContent className="p-8">
-                <div className="text-center text-slate-600">
-                  <PieChart className="h-16 w-16 mx-auto mb-4 text-slate-400" />
-                  <h3 className="text-xl font-semibold mb-2">Other Comprehensive Breakup</h3>
-                  <p>This report will show detailed comprehensive income breakdown.</p>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <TabsList className="grid w-full grid-cols-4 bg-white border">
+              <TabsTrigger value="disclosure" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Disclosure
+              </TabsTrigger>
+              <TabsTrigger value="sensitivity" className="flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Sensitivity Analysis
+              </TabsTrigger>
+              <TabsTrigger value="maturity" className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Maturity Profile
+              </TabsTrigger>
+              <TabsTrigger value="comprehensive" className="flex items-center gap-2">
+                <PieChart className="h-4 w-4" />
+                Other Comprehensive
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="disclosure">
+              <DisclosureReport />
+            </TabsContent>
+            
+            <TabsContent value="sensitivity">
+              <SensitivityAnalysisReport />
+            </TabsContent>
+            
+            <TabsContent value="maturity">
+              <MaturityProfileReport />
+            </TabsContent>
+            
+            <TabsContent value="comprehensive">
+              <OtherComprehensiveReport />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     );
