@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,14 +16,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const DataDetails = () => {
   const navigate = useNavigate();
 
-  const handleBackToRuntime = () => {
-    navigate("/");
+  const handleBackToReports = () => {
+    // Navigate back to the reports page (Index with showOutput=true)
+    navigate("/", { state: { showOutput: true } });
+  };
+
+  const handleExportCurrent = () => {
+    console.log("Exporting current details...");
+    // TODO: Implement export functionality
+  };
+
+  const handleExportLast = () => {
+    console.log("Exporting last details...");
+    // TODO: Implement export functionality
   };
 
   const currentDetailsData = [
@@ -280,11 +290,11 @@ const DataDetails = () => {
           <h1 className="text-3xl font-bold text-slate-800">Data Details</h1>
           <Button
             variant="outline"
-            onClick={handleBackToRuntime}
+            onClick={handleBackToReports}
             className="bg-white hover:bg-slate-50 border-slate-300"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Runtime
+            Back to Reports
           </Button>
         </div>
 
@@ -307,12 +317,23 @@ const DataDetails = () => {
           <TabsContent value="current">
             <Card className="bg-white shadow-xl border-2 border-slate-200">
               <CardHeader className="border-b border-slate-200 bg-slate-50">
-                <CardTitle className="text-xl text-slate-800">
-                  Current Period Details
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  Employee data and calculations for the current period
-                </CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-xl text-slate-800">
+                      Current Period Details
+                    </CardTitle>
+                    <CardDescription className="text-slate-600">
+                      Employee data and calculations for the current period
+                    </CardDescription>
+                  </div>
+                  <Button
+                    onClick={handleExportCurrent}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
@@ -373,12 +394,23 @@ const DataDetails = () => {
           <TabsContent value="last">
             <Card className="bg-white shadow-xl border-2 border-slate-200">
               <CardHeader className="border-b border-slate-200 bg-slate-50">
-                <CardTitle className="text-xl text-slate-800">
-                  Last Period Details
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  Employee data and calculations for the previous period
-                </CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-xl text-slate-800">
+                      Last Period Details
+                    </CardTitle>
+                    <CardDescription className="text-slate-600">
+                      Employee data and calculations for the previous period
+                    </CardDescription>
+                  </div>
+                  <Button
+                    onClick={handleExportLast}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
