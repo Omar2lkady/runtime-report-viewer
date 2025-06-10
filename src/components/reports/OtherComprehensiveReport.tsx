@@ -1,16 +1,35 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export const OtherComprehensiveReport = () => {
+  const handleExport = () => {
+    console.log("Exporting Other Comprehensive Report...");
+    // Export functionality will be implemented here
+  };
+
   return (
     <div className="space-y-6">
       <Card className="bg-white shadow-lg border-0">
         <CardHeader className="text-center border-b bg-slate-50">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-slate-800">Client A</h2>
-            <h3 className="text-xl font-semibold text-slate-700">Actuarial Valuation of EOSB Scheme | FY 2022</h3>
-            <Badge variant="outline" className="mx-auto">Working for Disclosures as per the IAS 19 (Revised 2011)</Badge>
+            <div className="flex justify-between items-start">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-slate-800">Client A</h2>
+                <h3 className="text-xl font-semibold text-slate-700">Actuarial Valuation of EOSB Scheme | FY 2022</h3>
+                <Badge variant="outline" className="mx-auto">Working for Disclosures as per the IAS 19 (Revised 2011)</Badge>
+              </div>
+              <Button 
+                onClick={handleExport}
+                variant="outline" 
+                size="sm"
+                className="ml-4"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="p-6">
