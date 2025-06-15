@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -355,13 +354,27 @@ const Index = () => {
               onValueChange={setActiveTab}
               className="space-y-6"
             >
-              <TabsList className="grid w-full grid-cols-4 bg-white border">
+              <TabsList className="grid w-full grid-cols-5 bg-white border">
                 <TabsTrigger
                   value="disclosure"
                   className="flex items-center gap-2"
                 >
                   {getTabIcon("disclosure", reportStatus.disclosure)}
                   Disclosure
+                </TabsTrigger>
+                <TabsTrigger
+                  value="comprehensive"
+                  className="flex items-center gap-2"
+                >
+                  {getTabIcon("comprehensive", reportStatus.comprehensive)}
+                  Other Comprehensive Income (OCI)
+                </TabsTrigger>
+                <TabsTrigger
+                  value="maturity"
+                  className="flex items-center gap-2"
+                >
+                  {getTabIcon("maturity", reportStatus.maturity)}
+                  Maturity
                 </TabsTrigger>
                 <TabsTrigger
                   value="sensitivity"
@@ -371,18 +384,11 @@ const Index = () => {
                   Sensitivity Analysis
                 </TabsTrigger>
                 <TabsTrigger
-                  value="maturity"
+                  value="liability"
                   className="flex items-center gap-2"
                 >
-                  {getTabIcon("maturity", reportStatus.maturity)}
-                  Maturity Profile
-                </TabsTrigger>
-                <TabsTrigger
-                  value="comprehensive"
-                  className="flex items-center gap-2"
-                >
-                  {getTabIcon("comprehensive", reportStatus.comprehensive)}
-                  Other Comprehensive
+                  <FileText className="h-4 w-4 text-slate-500" />
+                  Liability Movement
                 </TabsTrigger>
               </TabsList>
 
@@ -390,46 +396,46 @@ const Index = () => {
                 <DisclosureReport />
               </TabsContent>
 
-              <TabsContent value="sensitivity">
-                {reportStatus.sensitivity === "completed" ? (
-                  <SensitivityAnalysisReport />
+              <TabsContent value="comprehensive">
+                {reportStatus.comprehensive === "completed" ? (
+                  <OtherComprehensiveReport />
                 ) : (
                   <Card className="bg-white shadow-lg border-0">
                     <CardContent className="p-12 text-center">
                       <div className="max-w-md mx-auto">
-                        {reportStatus.sensitivity === "loading" ? (
+                        {reportStatus.comprehensive === "loading" ? (
                           <>
                             <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
                             <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Generating Sensitivity Analysis Report
+                              Generating Other Comprehensive Report
                             </h3>
                             <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.sensitivity.description}
+                              {reportTimeEstimates.comprehensive.description}
                             </p>
                             <div className="bg-blue-50 p-4 rounded-lg">
                               <p className="text-sm text-blue-800">
                                 Estimated time:{" "}
-                                {reportTimeEstimates.sensitivity.time}
+                                {reportTimeEstimates.comprehensive.time}
                               </p>
                             </div>
                           </>
                         ) : (
                           <>
-                            <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
                             <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Sensitivity Analysis Report
+                              Other Comprehensive Income (OCI) Report
                             </h3>
                             <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.sensitivity.description}
+                              {reportTimeEstimates.comprehensive.description}
                             </p>
                             <div className="bg-amber-50 p-4 rounded-lg mb-6">
                               <p className="text-sm text-amber-800">
                                 Estimated time:{" "}
-                                {reportTimeEstimates.sensitivity.time}
+                                {reportTimeEstimates.comprehensive.time}
                               </p>
                             </div>
                             <Button
-                              onClick={() => handleStartReport("sensitivity")}
+                              onClick={() => handleStartReport("comprehensive")}
                               className="bg-emerald-600 hover:bg-emerald-700 text-white"
                             >
                               <PlayCircle className="h-4 w-4 mr-2" />
@@ -496,46 +502,46 @@ const Index = () => {
                 )}
               </TabsContent>
 
-              <TabsContent value="comprehensive">
-                {reportStatus.comprehensive === "completed" ? (
-                  <OtherComprehensiveReport />
+              <TabsContent value="sensitivity">
+                {reportStatus.sensitivity === "completed" ? (
+                  <SensitivityAnalysisReport />
                 ) : (
                   <Card className="bg-white shadow-lg border-0">
                     <CardContent className="p-12 text-center">
                       <div className="max-w-md mx-auto">
-                        {reportStatus.comprehensive === "loading" ? (
+                        {reportStatus.sensitivity === "loading" ? (
                           <>
                             <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
                             <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Generating Other Comprehensive Report
+                              Generating Sensitivity Analysis Report
                             </h3>
                             <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.comprehensive.description}
+                              {reportTimeEstimates.sensitivity.description}
                             </p>
                             <div className="bg-blue-50 p-4 rounded-lg">
                               <p className="text-sm text-blue-800">
                                 Estimated time:{" "}
-                                {reportTimeEstimates.comprehensive.time}
+                                {reportTimeEstimates.sensitivity.time}
                               </p>
                             </div>
                           </>
                         ) : (
                           <>
-                            <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
                             <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Other Comprehensive Report
+                              Sensitivity Analysis Report
                             </h3>
                             <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.comprehensive.description}
+                              {reportTimeEstimates.sensitivity.description}
                             </p>
                             <div className="bg-amber-50 p-4 rounded-lg mb-6">
                               <p className="text-sm text-amber-800">
                                 Estimated time:{" "}
-                                {reportTimeEstimates.comprehensive.time}
+                                {reportTimeEstimates.sensitivity.time}
                               </p>
                             </div>
                             <Button
-                              onClick={() => handleStartReport("comprehensive")}
+                              onClick={() => handleStartReport("sensitivity")}
                               className="bg-emerald-600 hover:bg-emerald-700 text-white"
                             >
                               <PlayCircle className="h-4 w-4 mr-2" />
@@ -547,6 +553,22 @@ const Index = () => {
                     </CardContent>
                   </Card>
                 )}
+              </TabsContent>
+
+              <TabsContent value="liability">
+                <Card className="bg-white shadow-lg border-0">
+                  <CardContent className="p-12 text-center">
+                    <div className="max-w-md mx-auto">
+                      <FileText className="h-16 w-16 mx-auto text-emerald-600 mb-6" />
+                      <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                        Liability Movement (Placeholder)
+                      </h3>
+                      <p className="text-slate-600 mb-6">
+                        This is a placeholder for the Liability Movement report tab. Please provide report details or component to be shown here.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>
