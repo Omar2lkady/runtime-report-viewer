@@ -61,6 +61,11 @@ const Index = () => {
     assumptionSet: "current",
     lastAssumptionSet: "current",
     calculationBase: "age",
+    // New fields for disclosure report
+    currentFairValuePlanAssets: "",
+    currentEmployeesTransferredFrom: "",
+    lastOpeningNetAsset: "",
+    lastBenefitsPaidDuringYear: "",
   });
 
   const menuItems = [
@@ -793,6 +798,116 @@ const Index = () => {
                             </SelectItem>
                           </SelectContent>
                         </Select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Required Fields for Disclosure Report Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                      Required Fields for Disclosure Report
+                      <span className="text-sm font-normal text-slate-500 ml-2">
+                        (Optional)
+                      </span>
+                    </h3>
+                    
+                    {/* Current Section */}
+                    <div className="space-y-4">
+                      <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentFairValuePlanAssets"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Fair Value of Any Plan Assets
+                          </Label>
+                          <Input
+                            id="currentFairValuePlanAssets"
+                            type="number"
+                            placeholder="Enter fair value"
+                            value={formData.currentFairValuePlanAssets}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentFairValuePlanAssets: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentEmployeesTransferredFrom"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Employees Transferred From
+                          </Label>
+                          <Input
+                            id="currentEmployeesTransferredFrom"
+                            type="number"
+                            placeholder="Enter number of employees"
+                            value={formData.currentEmployeesTransferredFrom}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentEmployeesTransferredFrom: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Last Section */}
+                    <div className="space-y-4">
+                      <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="lastOpeningNetAsset"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Opening Net Asset
+                          </Label>
+                          <Input
+                            id="lastOpeningNetAsset"
+                            type="number"
+                            placeholder="Enter opening net asset"
+                            value={formData.lastOpeningNetAsset}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                lastOpeningNetAsset: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="lastBenefitsPaidDuringYear"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Benefits Paid During the Year
+                          </Label>
+                          <Input
+                            id="lastBenefitsPaidDuringYear"
+                            type="number"
+                            placeholder="Enter benefits paid"
+                            value={formData.lastBenefitsPaidDuringYear}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                lastBenefitsPaidDuringYear: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
