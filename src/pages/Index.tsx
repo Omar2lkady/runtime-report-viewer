@@ -152,6 +152,9 @@ const Index = () => {
       .slice(0, 3)
       .every((value) => value !== "") && formData.calculationBase !== "";
 
+  const showCurrentSections = formData.perform === "current" || formData.perform === "both";
+  const showLastSections = formData.perform === "last" || formData.perform === "both";
+
   if (showOutput) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex">
@@ -744,62 +747,66 @@ const Index = () => {
                       </span>
                     </h3>
                     <div className="grid grid-cols-1 gap-4">
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="assumptionSet"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Current Assumption Set
-                        </Label>
-                        <Select
-                          value={formData.assumptionSet}
-                          onValueChange={(value) =>
-                            setFormData({ ...formData, assumptionSet: value })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select assumption set" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="current">
-                              current assumption_SHMA demo (Copy)
-                            </SelectItem>
-                            <SelectItem value="previous">
-                              previous assumption set
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                      {showCurrentSections && (
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="assumptionSet"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Current Assumption Set
+                          </Label>
+                          <Select
+                            value={formData.assumptionSet}
+                            onValueChange={(value) =>
+                              setFormData({ ...formData, assumptionSet: value })
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select assumption set" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white">
+                              <SelectItem value="current">
+                                current assumption_SHMA demo (Copy)
+                              </SelectItem>
+                              <SelectItem value="previous">
+                                previous assumption set
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
 
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="lastAssumptionSet"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Last Assumption Set
-                        </Label>
-                        <Select
-                          value={formData.lastAssumptionSet}
-                          onValueChange={(value) =>
-                            setFormData({
-                              ...formData,
-                              lastAssumptionSet: value,
-                            })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select last assumption set" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="current">
-                              current assumption_SHMA demo (Copy)
-                            </SelectItem>
-                            <SelectItem value="previous">
-                              previous assumption set
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                      {showLastSections && (
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="lastAssumptionSet"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Last Assumption Set
+                          </Label>
+                          <Select
+                            value={formData.lastAssumptionSet}
+                            onValueChange={(value) =>
+                              setFormData({
+                                ...formData,
+                                lastAssumptionSet: value,
+                              })
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select last assumption set" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white">
+                              <SelectItem value="current">
+                                current assumption_SHMA demo (Copy)
+                              </SelectItem>
+                              <SelectItem value="previous">
+                                previous assumption set
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -813,104 +820,108 @@ const Index = () => {
                     </h3>
                     
                     {/* Current Section */}
-                    <div className="space-y-4">
-                      <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="currentFairValuePlanAssets"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Fair Value of Any Plan Assets
-                          </Label>
-                          <Input
-                            id="currentFairValuePlanAssets"
-                            type="number"
-                            placeholder="Enter fair value"
-                            value={formData.currentFairValuePlanAssets}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                currentFairValuePlanAssets: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
-                        </div>
+                    {showCurrentSections && (
+                      <div className="space-y-4">
+                        <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="currentFairValuePlanAssets"
+                              className="text-sm font-medium text-slate-700"
+                            >
+                              Fair Value of Any Plan Assets
+                            </Label>
+                            <Input
+                              id="currentFairValuePlanAssets"
+                              type="number"
+                              placeholder="Enter fair value"
+                              value={formData.currentFairValuePlanAssets}
+                              onChange={(e) =>
+                                setFormData({ 
+                                  ...formData, 
+                                  currentFairValuePlanAssets: e.target.value 
+                                })
+                              }
+                              className="bg-white border-slate-300"
+                            />
+                          </div>
 
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="currentEmployeesTransferredFrom"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Employees Transferred From
-                          </Label>
-                          <Input
-                            id="currentEmployeesTransferredFrom"
-                            type="number"
-                            placeholder="Enter number of employees"
-                            value={formData.currentEmployeesTransferredFrom}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                currentEmployeesTransferredFrom: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="currentEmployeesTransferredFrom"
+                              className="text-sm font-medium text-slate-700"
+                            >
+                              Employees Transferred From
+                            </Label>
+                            <Input
+                              id="currentEmployeesTransferredFrom"
+                              type="number"
+                              placeholder="Enter number of employees"
+                              value={formData.currentEmployeesTransferredFrom}
+                              onChange={(e) =>
+                                setFormData({ 
+                                  ...formData, 
+                                  currentEmployeesTransferredFrom: e.target.value 
+                                })
+                              }
+                              className="bg-white border-slate-300"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Last Section */}
-                    <div className="space-y-4">
-                      <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="lastOpeningNetAsset"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Opening Net Asset
-                          </Label>
-                          <Input
-                            id="lastOpeningNetAsset"
-                            type="number"
-                            placeholder="Enter opening net asset"
-                            value={formData.lastOpeningNetAsset}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                lastOpeningNetAsset: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
-                        </div>
+                    {showLastSections && (
+                      <div className="space-y-4">
+                        <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="lastOpeningNetAsset"
+                              className="text-sm font-medium text-slate-700"
+                            >
+                              Opening Net Asset
+                            </Label>
+                            <Input
+                              id="lastOpeningNetAsset"
+                              type="number"
+                              placeholder="Enter opening net asset"
+                              value={formData.lastOpeningNetAsset}
+                              onChange={(e) =>
+                                setFormData({ 
+                                  ...formData, 
+                                  lastOpeningNetAsset: e.target.value 
+                                })
+                              }
+                              className="bg-white border-slate-300"
+                            />
+                          </div>
 
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="lastBenefitsPaidDuringYear"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Benefits Paid During the Year
-                          </Label>
-                          <Input
-                            id="lastBenefitsPaidDuringYear"
-                            type="number"
-                            placeholder="Enter benefits paid"
-                            value={formData.lastBenefitsPaidDuringYear}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                lastBenefitsPaidDuringYear: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="lastBenefitsPaidDuringYear"
+                              className="text-sm font-medium text-slate-700"
+                            >
+                              Benefits Paid During the Year
+                            </Label>
+                            <Input
+                              id="lastBenefitsPaidDuringYear"
+                              type="number"
+                              placeholder="Enter benefits paid"
+                              value={formData.lastBenefitsPaidDuringYear}
+                              onChange={(e) =>
+                                setFormData({ 
+                                  ...formData, 
+                                  lastBenefitsPaidDuringYear: e.target.value 
+                                })
+                              }
+                              className="bg-white border-slate-300"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Action Buttons Section */}
