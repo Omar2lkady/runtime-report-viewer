@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -706,8 +707,9 @@ const Index = () => {
                             <SelectValue placeholder="Select perform" />
                           </SelectTrigger>
                           <SelectContent className="bg-white">
+                            <SelectItem value="current">Current</SelectItem>
+                            <SelectItem value="last">Last</SelectItem>
                             <SelectItem value="both">Both</SelectItem>
-                            <SelectItem value="single">Single</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
