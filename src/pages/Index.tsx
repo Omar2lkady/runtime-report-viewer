@@ -18,6 +18,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
   PlayCircle,
   FileText,
   BarChart3,
@@ -36,6 +44,8 @@ import {
   Calculator,
   FileSpreadsheet,
   Timer,
+  Plus,
+  Minus,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DisclosureReport } from "@/components/reports/DisclosureReport";
@@ -67,6 +77,17 @@ const Index = () => {
     currentEmployeesTransferredFrom: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
+    // New fields for sensitivity configuration
+    sensitivityConfig: {
+      discountRateIncrease: { enterValue: "", increasePercentage: "" },
+      discountRateDecrease: { enterValue: "", increasePercentage: "" },
+      salaryIncreaseRateIncrease: { enterValue: "", increasePercentage: "" },
+      salaryIncreaseRateDecrease: { enterValue: "", increasePercentage: "" },
+      withdrawalRatesIncrease: { enterValue: "", increasePercentage: "" },
+      withdrawalRatesDecrease: { enterValue: "", increasePercentage: "" },
+      yearMortalityAgeSetBack: { enterValue: "", increasePercentage: "" },
+      yearMortalityAgeSetForward: { enterValue: "", increasePercentage: "" },
+    }
   });
 
   const menuItems = [
@@ -154,6 +175,30 @@ const Index = () => {
 
   const showCurrentSections = formData.perform === "current" || formData.perform === "both";
   const showLastSections = formData.perform === "last" || formData.perform === "both";
+
+  const sensitivityTableData = [
+    { sign: "plus", particular: "Discount Rate", key: "discountRateIncrease" },
+    { sign: "minus", particular: "Discount Rate", key: "discountRateDecrease" },
+    { sign: "plus", particular: "Salary Increase Rate", key: "salaryIncreaseRateIncrease" },
+    { sign: "minus", particular: "Salary Increase Rate", key: "salaryIncreaseRateDecrease" },
+    { sign: "plus", particular: "Withdrawal Rates", key: "withdrawalRatesIncrease" },
+    { sign: "minus", particular: "Withdrawal Rates", key: "withdrawalRatesDecrease" },
+    { sign: "plus", particular: "Year Mortality age set back", key: "yearMortalityAgeSetBack" },
+    { sign: "minus", particular: "Year Mortality age set forward", key: "yearMortalityAgeSetForward" },
+  ];
+
+  const handleSensitivityConfigChange = (key: string, field: 'enterValue' | 'increasePercentage', value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      sensitivityConfig: {
+        ...prev.sensitivityConfig,
+        [key]: {
+          ...prev.sensitivityConfig[key as keyof typeof prev.sensitivityConfig],
+          [field]: value
+        }
+      }
+    }));
+  };
 
   if (showOutput) {
     return (
@@ -946,6 +991,63 @@ const Index = () => {
                         </div>
                       </div>
                     )}
+                  </div>
+
+                  {/* Sensitivity Report Configuration Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                      Sensitivity Report Configuration
+                      <span className="text-sm font-normal text-slate-500 ml-2">
+                        (Optional)
+                      </span>
+                    </h3>
+                    
+                    <div className="border rounded-lg overflow-hidden">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="bg-slate-50">
+                            <TableHead className="w-16 text-center">Sign</TableHead>
+                            <TableHead className="w-32">Enter Value</TableHead>
+                            <TableHead className="flex-1">Particulars</TableHead>
+                            <TableHead className="w-40">Increase Percentage</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {sensitivityTableData.map((row, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="text-center">
+                                {row.sign === "plus" ? (
+                                  <Plus className="h-4 w-4 mx-auto text-green-600" />
+                                ) : (
+                                  <Minus className="h-4 w-4 mx-auto text-red-600" />
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                <Input
+                                  type="number"
+                                  placeholder="user enter value"
+                                  value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.enterValue || ""}
+                                  onChange={(e) => handleSensitivityConfigChange(row.key, 'enterValue', e.target.value)}
+                                  className="bg-white border-slate-300 text-sm"
+                                />
+                              </TableCell>
+                              <TableCell className="font-medium text-slate-700">
+                                {row.particular}
+                              </TableCell>
+                              <TableCell>
+                                <Input
+                                  type="number"
+                                  placeholder="user enter value"
+                                  value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.increasePercentage || ""}
+                                  onChange={(e) => handleSensitivityConfigChange(row.key, 'increasePercentage', e.target.value)}
+                                  className="bg-white border-slate-300 text-sm"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
                   </div>
 
                   {/* Action Buttons Section */}
