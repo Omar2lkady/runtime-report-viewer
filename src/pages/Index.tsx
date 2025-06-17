@@ -80,16 +80,16 @@ const Index = () => {
     currentEmployeesTransferredFrom: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
-    // New fields for sensitivity configuration
+    // New fields for sensitivity configuration with default values from the image
     sensitivityConfig: {
-      discountRateIncrease: { enterValue: "", increasePercentage: "" },
-      discountRateDecrease: { enterValue: "", increasePercentage: "" },
-      salaryIncreaseRateIncrease: { enterValue: "", increasePercentage: "" },
-      salaryIncreaseRateDecrease: { enterValue: "", increasePercentage: "" },
-      withdrawalRatesIncrease: { enterValue: "", increasePercentage: "" },
-      withdrawalRatesDecrease: { enterValue: "", increasePercentage: "" },
-      yearMortalityAgeSetBack: { enterValue: "", increasePercentage: "" },
-      yearMortalityAgeSetForward: { enterValue: "", increasePercentage: "" },
+      discountRateIncrease: { enterValue: "1", increasePercentage: "1" },
+      discountRateDecrease: { enterValue: "1", increasePercentage: "1" },
+      salaryIncreaseRateIncrease: { enterValue: "1", increasePercentage: "1" },
+      salaryIncreaseRateDecrease: { enterValue: "1", increasePercentage: "1" },
+      withdrawalRatesIncrease: { enterValue: "10", increasePercentage: "1.1" },
+      withdrawalRatesDecrease: { enterValue: "10", increasePercentage: "0.9" },
+      yearMortalityAgeSetBack: { enterValue: "10", increasePercentage: "1.1" },
+      yearMortalityAgeSetForward: { enterValue: "user enter value", increasePercentage: "0.9" },
     }
   });
 
