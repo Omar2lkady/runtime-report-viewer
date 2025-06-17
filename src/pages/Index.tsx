@@ -46,6 +46,8 @@ import {
   Timer,
   Plus,
   Minus,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DisclosureReport } from "@/components/reports/DisclosureReport";
@@ -58,6 +60,7 @@ const Index = () => {
   const [showOutput, setShowOutput] = useState(false);
   const [activeTab, setActiveTab] = useState("disclosure");
   const [activeMenuItem, setActiveMenuItem] = useState("Runtime");
+  const [showSensitivityConfig, setShowSensitivityConfig] = useState(false);
   const [reportStatus, setReportStatus] = useState({
     disclosure: "completed",
     sensitivity: "pending",
@@ -995,59 +998,77 @@ const Index = () => {
 
                   {/* Sensitivity Report Configuration Section */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                      Sensitivity Report Configuration
-                      <span className="text-sm font-normal text-slate-500 ml-2">
-                        (Optional)
-                      </span>
-                    </h3>
-                    
-                    <div className="border rounded-lg overflow-hidden">
-                      <Table>
-                        <TableHeader>
-                          <TableRow className="bg-slate-50">
-                            <TableHead className="w-16 text-center">Sign</TableHead>
-                            <TableHead className="w-32">Enter Value</TableHead>
-                            <TableHead className="flex-1">Particulars</TableHead>
-                            <TableHead className="w-40">Increase Percentage</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {sensitivityTableData.map((row, index) => (
-                            <TableRow key={index}>
-                              <TableCell className="text-center">
-                                {row.sign === "plus" ? (
-                                  <Plus className="h-4 w-4 mx-auto text-green-600" />
-                                ) : (
-                                  <Minus className="h-4 w-4 mx-auto text-red-600" />
-                                )}
-                              </TableCell>
-                              <TableCell>
-                                <Input
-                                  type="number"
-                                  placeholder="user enter value"
-                                  value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.enterValue || ""}
-                                  onChange={(e) => handleSensitivityConfigChange(row.key, 'enterValue', e.target.value)}
-                                  className="bg-white border-slate-300 text-sm"
-                                />
-                              </TableCell>
-                              <TableCell className="font-medium text-slate-700">
-                                {row.particular}
-                              </TableCell>
-                              <TableCell>
-                                <Input
-                                  type="number"
-                                  placeholder="user enter value"
-                                  value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.increasePercentage || ""}
-                                  onChange={(e) => handleSensitivityConfigChange(row.key, 'increasePercentage', e.target.value)}
-                                  className="bg-white border-slate-300 text-sm"
-                                />
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-slate-800">
+                        Sensitivity Report Configuration
+                        <span className="text-sm font-normal text-slate-500 ml-2">
+                          (Optional)
+                        </span>
+                      </h3>
                     </div>
+                    
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowSensitivityConfig(!showSensitivityConfig)}
+                      className="w-full justify-between bg-white border-slate-300 hover:bg-slate-50 hover:border-slate-400 text-slate-700 font-medium h-12"
+                    >
+                      <span>Sensitivity Report Configuration</span>
+                      {showSensitivityConfig ? (
+                        <ChevronUp className="h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4" />
+                      )}
+                    </Button>
+
+                    {showSensitivityConfig && (
+                      <div className="border rounded-lg overflow-hidden animate-fade-in">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-slate-50">
+                              <TableHead className="w-16 text-center">Sign</TableHead>
+                              <TableHead className="w-32">Enter Value</TableHead>
+                              <TableHead className="flex-1">Particulars</TableHead>
+                              <TableHead className="w-40">Increase Percentage</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {sensitivityTableData.map((row, index) => (
+                              <TableRow key={index}>
+                                <TableCell className="text-center">
+                                  {row.sign === "plus" ? (
+                                    <Plus className="h-4 w-4 mx-auto text-green-600" />
+                                  ) : (
+                                    <Minus className="h-4 w-4 mx-auto text-red-600" />
+                                  )}
+                                </TableCell>
+                                <TableCell>
+                                  <Input
+                                    type="number"
+                                    placeholder="user enter value"
+                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.enterValue || ""}
+                                    onChange={(e) => handleSensitivityConfigChange(row.key, 'enterValue', e.target.value)}
+                                    className="bg-white border-slate-300 text-sm"
+                                  />
+                                </TableCell>
+                                <TableCell className="font-medium text-slate-700">
+                                  {row.particular}
+                                </TableCell>
+                                <TableCell>
+                                  <Input
+                                    type="number"
+                                    placeholder="user enter value"
+                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.increasePercentage || ""}
+                                    onChange={(e) => handleSensitivityConfigChange(row.key, 'increasePercentage', e.target.value)}
+                                    className="bg-white border-slate-300 text-sm"
+                                  />
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </div>
+                    )}
                   </div>
 
                   {/* Action Buttons Section */}
