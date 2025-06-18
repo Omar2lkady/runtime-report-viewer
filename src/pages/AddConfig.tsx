@@ -1,227 +1,162 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const AddConfig = () => {
   const navigate = useNavigate();
-  const form = useForm({
-    defaultValues: {
-      title: "",
-      company: "",
-      configCountry: "",
-      discountRate: "",
-      salaryIncreaseRate: "",
-      withdrawalRates: "",
-      mortalityAgeSetback: "",
-      mortalityAgeSetforward: "",
-    },
-  });
+  const [title, setTitle] = useState("");
+  const [company, setCompany] = useState("");
+  const [configCountry, setConfigCountry] = useState("");
 
-  const handleCreateConfig = () => {
-    console.log("Creating config...", form.getValues());
-    // Handle config creation logic here
-    navigate("/config");
+  // Sensitivity Analysis state
+  const [sensitivityData, setSensitivityData] = useState([
+    { sign: "+/-", percentage: "1%", particulars: "Discount Rate" },
+    { sign: "+/-", percentage: "1%", particulars: "Salary Increase Rate" },
+    { sign: "+/-", percentage: "10%", particulars: "Withdrawal Rates" },
+    { sign: "+/-", percentage: "1 Year", particulars: "Mortality Rates" },
+  ]);
+
+  const handleSensitivityChange = (index: number, field: string, value: string) => {
+    const updatedData = [...sensitivityData];
+    updatedData[index] = { ...updatedData[index], [field]: value };
+    setSensitivityData(updatedData);
   };
 
-  const handleCreateAndAddAnother = () => {
-    console.log("Creating config and adding another...", form.getValues());
-    // Handle config creation logic here
-    form.reset();
+  const handleSubmit = () => {
+    console.log("Config Data:", { title, company, configCountry, sensitivityData });
+    // Handle form submission
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Create Config</h1>
-        <div className="flex gap-3">
-          <Button 
-            variant="outline"
-            onClick={handleCreateAndAddAnother}
-          >
-            Create and add another
-          </Button>
-          <Button 
-            onClick={handleCreateConfig}
-            className="bg-green-600 hover:bg-green-700 text-white"
-          >
-            Create
-          </Button>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b px-6 py-4">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-900">Create Config</h1>
+          <div className="flex items-center space-x-4">
+            <Button 
+              variant="outline"
+              onClick={() => navigate("/config")}
+            >
+              Create and add another
+            </Button>
+            <Button 
+              onClick={handleSubmit}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              Create
+            </Button>
+          </div>
         </div>
       </div>
 
-      <Form {...form}>
-        <form className="space-y-6">
-          {/* Basic Config Fields */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Basic Configuration</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Title <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Enter config title" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+      {/* Main Content */}
+      <div className="p-6 space-y-6">
+        {/* Basic Information */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Basic Information</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <Label htmlFor="title">Title <span className="text-red-500">*</span></Label>
+              <Input
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter config title"
               />
+            </div>
 
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Company <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select company" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="test-company">test company</SelectItem>
-                        <SelectItem value="qenawy-company">qenawy company</SelectItem>
-                        <SelectItem value="adnh">adnh</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div>
+              <Label htmlFor="company">Company <span className="text-red-500">*</span></Label>
+              <Select value={company} onValueChange={setCompany}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select company" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="test-company">test company</SelectItem>
+                  <SelectItem value="qenawy-company">qenawy company</SelectItem>
+                  <SelectItem value="adnh">adnh</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-              <FormField
-                control={form.control}
-                name="configCountry"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Config Country <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select country" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="pakistani">Pakistani</SelectItem>
-                        <SelectItem value="saudi">Saudi</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-          </Card>
+            <div>
+              <Label htmlFor="config-country">Config Country <span className="text-red-500">*</span></Label>
+              <Select value={configCountry} onValueChange={setConfigCountry}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select country" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="pakistani">Pakistani</SelectItem>
+                  <SelectItem value="saudi">Saudi</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Sensitivity Analysis Report Configuration */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Sensitivity Analysis Report Configuration</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="discountRate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Discount Rate (%)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" step="0.01" placeholder="e.g., 5.5" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="salaryIncreaseRate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Salary Increase Rate (%)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" step="0.01" placeholder="e.g., 3.0" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="withdrawalRates"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Withdrawal Rates (%)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" step="0.01" placeholder="e.g., 10.0" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="mortalityAgeSetback"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mortality Age Set Back (Years)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="e.g., 1" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="mortalityAgeSetforward"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mortality Age Set Forward (Years)</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="number" placeholder="e.g., 1" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                <h4 className="font-medium text-blue-900 mb-2">Configuration Notes:</h4>
-                <ul className="text-sm text-blue-800 space-y-1">
-                  <li>• Discount Rate: Used for present value calculations</li>
-                  <li>• Salary Increase Rate: Annual salary growth assumption</li>
-                  <li>• Withdrawal Rates: Employee turnover assumptions</li>
-                  <li>• Mortality adjustments affect life expectancy calculations</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </form>
-      </Form>
+        {/* Sensitivity Analysis Configuration */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Sensitivity Analysis Configuration</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4 font-medium bg-gray-50">Sign</th>
+                    <th className="text-left py-3 px-4 font-medium bg-gray-50">Percentage</th>
+                    <th className="text-left py-3 px-4 font-medium bg-gray-50">Particulars</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sensitivityData.map((row, index) => (
+                    <tr key={index} className="border-b">
+                      <td className="py-2 px-4">
+                        <Select
+                          value={row.sign}
+                          onValueChange={(value) => handleSensitivityChange(index, "sign", value)}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="+/-">+/-</SelectItem>
+                            <SelectItem value="+">+</SelectItem>
+                            <SelectItem value="-">-</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </td>
+                      <td className="py-2 px-4">
+                        <Input
+                          value={row.percentage}
+                          onChange={(e) => handleSensitivityChange(index, "percentage", e.target.value)}
+                          className="w-full"
+                        />
+                      </td>
+                      <td className="py-2 px-4">
+                        <Input
+                          value={row.particulars}
+                          onChange={(e) => handleSensitivityChange(index, "particulars", e.target.value)}
+                          className="w-full"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
