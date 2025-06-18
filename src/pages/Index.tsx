@@ -80,16 +80,16 @@ const Index = () => {
     currentEmployeesTransferredFrom: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
-    // New fields for sensitivity configuration with default values from the image
+    // Updated sensitivity configuration to match the image structure
     sensitivityConfig: {
-      discountRateIncrease: { enterValue: "1", increasePercentage: "1" },
-      discountRateDecrease: { enterValue: "1", increasePercentage: "1" },
-      salaryIncreaseRateIncrease: { enterValue: "1", increasePercentage: "1" },
-      salaryIncreaseRateDecrease: { enterValue: "1", increasePercentage: "1" },
-      withdrawalRatesIncrease: { enterValue: "10", increasePercentage: "1.1" },
-      withdrawalRatesDecrease: { enterValue: "10", increasePercentage: "0.9" },
-      yearMortalityAgeSetBack: { enterValue: "10", increasePercentage: "1.1" },
-      yearMortalityAgeSetForward: { enterValue: "user enter value", increasePercentage: "0.9" },
+      discountRateIncrease: { percentage: "1" },
+      discountRateDecrease: { percentage: "1" },
+      salaryIncreaseRateIncrease: { percentage: "1" },
+      salaryIncreaseRateDecrease: { percentage: "1" },
+      withdrawalRatesIncrease: { percentage: "10" },
+      withdrawalRatesDecrease: { percentage: "10" },
+      mortalityRatesSetBack: { percentage: "10" },
+      mortalityRatesSetForward: { percentage: "10" },
     }
   });
 
@@ -186,19 +186,16 @@ const Index = () => {
     { sign: "minus", particular: "Salary Increase Rate", key: "salaryIncreaseRateDecrease" },
     { sign: "plus", particular: "Withdrawal Rates", key: "withdrawalRatesIncrease" },
     { sign: "minus", particular: "Withdrawal Rates", key: "withdrawalRatesDecrease" },
-    { sign: "plus", particular: "Year Mortality age set back", key: "yearMortalityAgeSetBack" },
-    { sign: "minus", particular: "Year Mortality age set forward", key: "yearMortalityAgeSetForward" },
+    { sign: "plus", particular: "Mortality Rates set back", key: "mortalityRatesSetBack" },
+    { sign: "minus", particular: "Mortality Rates set forward", key: "mortalityRatesSetForward" },
   ];
 
-  const handleSensitivityConfigChange = (key: string, field: 'enterValue' | 'increasePercentage', value: string) => {
+  const handleSensitivityConfigChange = (key: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       sensitivityConfig: {
         ...prev.sensitivityConfig,
-        [key]: {
-          ...prev.sensitivityConfig[key as keyof typeof prev.sensitivityConfig],
-          [field]: value
-        }
+        [key]: { percentage: value }
       }
     }));
   };
@@ -1027,9 +1024,8 @@ const Index = () => {
                           <TableHeader>
                             <TableRow className="bg-slate-50">
                               <TableHead className="w-16 text-center">Sign</TableHead>
-                              <TableHead className="w-32">Enter Value</TableHead>
+                              <TableHead className="w-32">Percentage</TableHead>
                               <TableHead className="flex-1">Particulars</TableHead>
-                              <TableHead className="w-40">Increase Percentage</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -1045,23 +1041,14 @@ const Index = () => {
                                 <TableCell>
                                   <Input
                                     type="number"
-                                    placeholder="user enter value"
-                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.enterValue || ""}
-                                    onChange={(e) => handleSensitivityConfigChange(row.key, 'enterValue', e.target.value)}
+                                    placeholder="Enter percentage"
+                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.percentage || ""}
+                                    onChange={(e) => handleSensitivityConfigChange(row.key, e.target.value)}
                                     className="bg-white border-slate-300 text-sm"
                                   />
                                 </TableCell>
                                 <TableCell className="font-medium text-slate-700">
                                   {row.particular}
-                                </TableCell>
-                                <TableCell>
-                                  <Input
-                                    type="number"
-                                    placeholder="user enter value"
-                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.increasePercentage || ""}
-                                    onChange={(e) => handleSensitivityConfigChange(row.key, 'increasePercentage', e.target.value)}
-                                    className="bg-white border-slate-300 text-sm"
-                                  />
                                 </TableCell>
                               </TableRow>
                             ))}
