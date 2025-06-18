@@ -80,16 +80,13 @@ const Index = () => {
     currentEmployeesTransferredFrom: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
-    // Updated sensitivity configuration to match the image structure
+    // Updated sensitivity configuration to match the new merged format
     sensitivityConfig: {
-      discountRateIncrease: { percentage: "1" },
-      discountRateDecrease: { percentage: "1" },
-      salaryIncreaseRateIncrease: { percentage: "1" },
-      salaryIncreaseRateDecrease: { percentage: "1" },
-      withdrawalRatesIncrease: { percentage: "10" },
-      withdrawalRatesDecrease: { percentage: "10" },
-      mortalityRatesSetBack: { percentage: "10" },
-      mortalityRatesSetForward: { percentage: "10" },
+      discountRate: "1",
+      salaryIncreaseRate: "1", 
+      withdrawalRates: "10",
+      mortalityRatesSetBack: "10",
+      mortalityRatesSetForward: "10",
     }
   });
 
@@ -180,14 +177,11 @@ const Index = () => {
   const showLastSections = formData.perform === "last" || formData.perform === "both";
 
   const sensitivityTableData = [
-    { sign: "plus", particular: "Discount Rate", key: "discountRateIncrease" },
-    { sign: "minus", particular: "Discount Rate", key: "discountRateDecrease" },
-    { sign: "plus", particular: "Salary Increase Rate", key: "salaryIncreaseRateIncrease" },
-    { sign: "minus", particular: "Salary Increase Rate", key: "salaryIncreaseRateDecrease" },
-    { sign: "plus", particular: "Withdrawal Rates", key: "withdrawalRatesIncrease" },
-    { sign: "minus", particular: "Withdrawal Rates", key: "withdrawalRatesDecrease" },
-    { sign: "plus", particular: "Mortality Rates set back", key: "mortalityRatesSetBack" },
-    { sign: "minus", particular: "Mortality Rates set forward", key: "mortalityRatesSetForward" },
+    { sign: "(+/-)", particular: "Discount Rate", key: "discountRate" },
+    { sign: "(+/-)", particular: "Salary Increase Rate", key: "salaryIncreaseRate" },
+    { sign: "(+/-)", particular: "Withdrawal Rates", key: "withdrawalRates" },
+    { sign: "(+)", particular: "Mortality Rates set back", key: "mortalityRatesSetBack" },
+    { sign: "(-)", particular: "Mortality Rates set forward", key: "mortalityRatesSetForward" },
   ];
 
   const handleSensitivityConfigChange = (key: string, value: string) => {
@@ -195,7 +189,7 @@ const Index = () => {
       ...prev,
       sensitivityConfig: {
         ...prev.sensitivityConfig,
-        [key]: { percentage: value }
+        [key]: value
       }
     }));
   };
@@ -1023,31 +1017,27 @@ const Index = () => {
                         <Table>
                           <TableHeader>
                             <TableRow className="bg-slate-50">
-                              <TableHead className="w-16 text-center">Sign</TableHead>
-                              <TableHead className="w-32">Percentage</TableHead>
-                              <TableHead className="flex-1">Particulars</TableHead>
+                              <TableHead className="w-20 text-center font-semibold text-slate-700">Sign</TableHead>
+                              <TableHead className="w-32 text-center font-semibold text-slate-700">Percentage</TableHead>
+                              <TableHead className="flex-1 text-center font-semibold text-slate-700">Particulars</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
                             {sensitivityTableData.map((row, index) => (
-                              <TableRow key={index}>
-                                <TableCell className="text-center">
-                                  {row.sign === "plus" ? (
-                                    <Plus className="h-4 w-4 mx-auto text-green-600" />
-                                  ) : (
-                                    <Minus className="h-4 w-4 mx-auto text-red-600" />
-                                  )}
+                              <TableRow key={index} className="hover:bg-slate-50">
+                                <TableCell className="text-center font-medium text-slate-600">
+                                  {row.sign}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className="text-center">
                                   <Input
                                     type="number"
                                     placeholder="Enter percentage"
-                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig]?.percentage || ""}
+                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig] || ""}
                                     onChange={(e) => handleSensitivityConfigChange(row.key, e.target.value)}
-                                    className="bg-white border-slate-300 text-sm"
+                                    className="bg-white border-slate-300 text-sm text-center"
                                   />
                                 </TableCell>
-                                <TableCell className="font-medium text-slate-700">
+                                <TableCell className="font-medium text-slate-700 text-center">
                                   {row.particular}
                                 </TableCell>
                               </TableRow>
