@@ -18,14 +18,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
   PlayCircle,
   FileText,
   BarChart3,
@@ -44,10 +36,6 @@ import {
   Calculator,
   FileSpreadsheet,
   Timer,
-  Plus,
-  Minus,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DisclosureReport } from "@/components/reports/DisclosureReport";
@@ -60,7 +48,6 @@ const Index = () => {
   const [showOutput, setShowOutput] = useState(false);
   const [activeTab, setActiveTab] = useState("disclosure");
   const [activeMenuItem, setActiveMenuItem] = useState("Runtime");
-  const [showSensitivityConfig, setShowSensitivityConfig] = useState(false);
   const [reportStatus, setReportStatus] = useState({
     disclosure: "completed",
     sensitivity: "pending",
@@ -80,14 +67,6 @@ const Index = () => {
     currentEmployeesTransferredFrom: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
-    // Updated sensitivity configuration to match the new merged format
-    sensitivityConfig: {
-      discountRate: "1",
-      salaryIncreaseRate: "1", 
-      withdrawalRates: "10",
-      mortalityRatesSetBack: "10",
-      mortalityRatesSetForward: "10",
-    }
   });
 
   const menuItems = [
@@ -175,24 +154,6 @@ const Index = () => {
 
   const showCurrentSections = formData.perform === "current" || formData.perform === "both";
   const showLastSections = formData.perform === "last" || formData.perform === "both";
-
-  const sensitivityTableData = [
-    { sign: "(+/-)", particular: "Discount Rate", key: "discountRate" },
-    { sign: "(+/-)", particular: "Salary Increase Rate", key: "salaryIncreaseRate" },
-    { sign: "(+/-)", particular: "Withdrawal Rates", key: "withdrawalRates" },
-    { sign: "(+)", particular: "Mortality Rates set back", key: "mortalityRatesSetBack" },
-    { sign: "(-)", particular: "Mortality Rates set forward", key: "mortalityRatesSetForward" },
-  ];
-
-  const handleSensitivityConfigChange = (key: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      sensitivityConfig: {
-        ...prev.sensitivityConfig,
-        [key]: value
-      }
-    }));
-  };
 
   if (showOutput) {
     return (
@@ -983,67 +944,6 @@ const Index = () => {
                             />
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Sensitivity Report Configuration Section */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-slate-800">
-                        Sensitivity Report Configuration
-                        <span className="text-sm font-normal text-slate-500 ml-2">
-                          (Optional)
-                        </span>
-                      </h3>
-                    </div>
-                    
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => setShowSensitivityConfig(!showSensitivityConfig)}
-                      className="w-full justify-between bg-white border-slate-300 hover:bg-slate-50 hover:border-slate-400 text-slate-700 font-medium h-12"
-                    >
-                      <span>Sensitivity Report Configuration</span>
-                      {showSensitivityConfig ? (
-                        <ChevronUp className="h-4 w-4" />
-                      ) : (
-                        <ChevronDown className="h-4 w-4" />
-                      )}
-                    </Button>
-
-                    {showSensitivityConfig && (
-                      <div className="border rounded-lg overflow-hidden animate-fade-in">
-                        <Table>
-                          <TableHeader>
-                            <TableRow className="bg-slate-50">
-                              <TableHead className="w-20 text-center font-semibold text-slate-700">Sign</TableHead>
-                              <TableHead className="w-32 text-center font-semibold text-slate-700">Percentage</TableHead>
-                              <TableHead className="flex-1 text-center font-semibold text-slate-700">Particulars</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {sensitivityTableData.map((row, index) => (
-                              <TableRow key={index} className="hover:bg-slate-50">
-                                <TableCell className="text-center font-medium text-slate-600">
-                                  {row.sign}
-                                </TableCell>
-                                <TableCell className="text-center">
-                                  <Input
-                                    type="number"
-                                    placeholder="Enter percentage"
-                                    value={formData.sensitivityConfig[row.key as keyof typeof formData.sensitivityConfig] || ""}
-                                    onChange={(e) => handleSensitivityConfigChange(row.key, e.target.value)}
-                                    className="bg-white border-slate-300 text-sm text-center"
-                                  />
-                                </TableCell>
-                                <TableCell className="font-medium text-slate-700 text-center">
-                                  {row.particular}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
                       </div>
                     )}
                   </div>
