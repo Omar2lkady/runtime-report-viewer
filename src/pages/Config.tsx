@@ -1,8 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const mockConfigs = [
   { id: 1, title: "qenawy", company: "qenawy company" },
@@ -14,12 +14,21 @@ const mockConfigs = [
 ];
 
 const Config = () => {
+  const navigate = useNavigate();
+
+  const handleAddConfig = () => {
+    navigate("/add-config");
+  };
+
   return (
     <div className="container mx-auto p-6">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-2xl font-bold">Config</CardTitle>
-          <Button className="bg-green-600 hover:bg-green-700 text-white">
+          <Button 
+            className="bg-green-600 hover:bg-green-700 text-white"
+            onClick={handleAddConfig}
+          >
             Add Config
           </Button>
         </CardHeader>
