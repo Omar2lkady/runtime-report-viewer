@@ -30,8 +30,14 @@ const App = () => (
               <main className="flex-1 p-6">
                 <Routes>
                   <Route path="/" element={<Index />} />
-                  <Route path="/data-details" element={<DataDetails />} />
+                  <Route path="/users" element={<div className="p-6"><h1 className="text-2xl font-bold">Users</h1><p>Users page coming soon...</p></div>} />
+                  <Route path="/companies" element={<div className="p-6"><h1 className="text-2xl font-bold">Companies</h1><p>Companies page coming soon...</p></div>} />
                   <Route path="/config" element={<Config />} />
+                  <Route path="/products" element={<div className="p-6"><h1 className="text-2xl font-bold">Products</h1><p>Products page coming soon...</p></div>} />
+                  <Route path="/data-details" element={<DataDetails />} />
+                  <Route path="/master-assumption" element={<div className="p-6"><h1 className="text-2xl font-bold">Master Assumption</h1><p>Master assumption page coming soon...</p></div>} />
+                  <Route path="/assumption-set" element={<div className="p-6"><h1 className="text-2xl font-bold">Assumption Set</h1><p>Assumption set page coming soon...</p></div>} />
+                  <Route path="/runtime" element={<Index />} />
                   <Route path="/add-config" element={<AddConfig />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />

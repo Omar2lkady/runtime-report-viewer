@@ -1,5 +1,5 @@
 
-import { Settings, Database, Play, Users } from "lucide-react";
+import { Home, Users, Building2, Settings, Package, Database, Calendar, FileText, Clock } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -13,18 +13,22 @@ import {
 } from "@/components/ui/sidebar";
 
 const navigationItems = [
-  { title: "Runtime", url: "/", icon: Play },
+  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Users", url: "/users", icon: Users },
+  { title: "Companies", url: "/companies", icon: Building2 },
   { title: "Config", url: "/config", icon: Settings },
-  { title: "Data Details", url: "/data-details", icon: Database },
-  { title: "User", url: "#", icon: Users },
+  { title: "Products", url: "/products", icon: Package },
+  { title: "Manage datasets", url: "/data-details", icon: Database },
+  { title: "Master assumption", url: "/master-assumption", icon: Calendar },
+  { title: "Assumption set", url: "/assumption-set", icon: FileText },
+  { title: "Runtime", url: "/runtime", icon: Clock },
 ];
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="w-64">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
@@ -34,11 +38,11 @@ export function AppSidebar() {
                       to={item.url}
                       className={({ isActive }) =>
                         isActive 
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" 
-                          : "hover:bg-sidebar-accent/50"
+                          ? "bg-green-100 text-green-700 font-medium border-r-2 border-green-500" 
+                          : "text-gray-600 hover:bg-gray-50"
                       }
                     >
-                      <item.icon className="h-4 w-4" />
+                      <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
                     </NavLink>
                   </SidebarMenuButton>
