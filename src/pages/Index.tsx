@@ -578,411 +578,377 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex">
-      {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg border-r border-slate-200 flex flex-col">
-        <div className="p-6 border-b border-slate-200">
-          <h2 className="text-xl font-bold text-slate-800">
-            End of service benefits
-          </h2>
-        </div>
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
-            {menuItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <li key={item.name}>
-                  <button
-                    onClick={() => setActiveMenuItem(item.name)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                      activeMenuItem === item.name
-                        ? "bg-emerald-100 text-emerald-800 font-medium"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
-                    }`}
-                  >
-                    <Icon className="h-5 w-5" />
-                    {item.name}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <div className="container mx-auto px-6 py-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-              <h1 className="text-4xl font-bold text-slate-800">
-                Create Runtime
-              </h1>
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  onClick={handleBackToListing}
-                  className="bg-white hover:bg-slate-50"
-                >
-                  Back to listing
-                </Button>
-                <Button
-                  variant="outline"
-                  className="bg-white hover:bg-slate-50"
-                  disabled
-                >
-                  Create and add another
-                </Button>
-              </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl font-bold text-slate-800">
+              Create Runtime
+            </h1>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={handleBackToListing}
+                className="bg-white hover:bg-slate-50"
+              >
+                Back to listing
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-slate-50"
+                disabled
+              >
+                Create and add another
+              </Button>
             </div>
+          </div>
 
-            <div className="max-w-2xl mx-auto">
-              {/* Runtime Configuration */}
-              <Card className="bg-white shadow-lg border-0">
-                <CardHeader>
-                  <CardTitle className="text-xl text-slate-800">
-                    Runtime Configuration
-                  </CardTitle>
-                  <CardDescription>
-                    Configure the parameters for your runtime
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  {/* Data Configuration Section */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                      Data Configuration
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="config"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Config <span className="text-red-500">*</span>
-                        </Label>
-                        <Select
-                          value={formData.config}
-                          onValueChange={(value) =>
-                            setFormData({ ...formData, config: value })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select config" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="config1">Config 1</SelectItem>
-                            <SelectItem value="config2">Config 2</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+          <div className="max-w-2xl mx-auto">
+            {/* Runtime Configuration */}
+            <Card className="bg-white shadow-lg border-0">
+              <CardHeader>
+                <CardTitle className="text-xl text-slate-800">
+                  Runtime Configuration
+                </CardTitle>
+                <CardDescription>
+                  Configure the parameters for your runtime
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-8">
+                {/* Data Configuration Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                    Data Configuration
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="config"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Config <span className="text-red-500">*</span>
+                      </Label>
+                      <Select
+                        value={formData.config}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, config: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select config" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white">
+                          <SelectItem value="config1">Config 1</SelectItem>
+                          <SelectItem value="config2">Config 2</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="dataset"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Dataset <span className="text-red-500">*</span>
-                        </Label>
-                        <Select
-                          value={formData.dataset}
-                          onValueChange={(value) =>
-                            setFormData({ ...formData, dataset: value })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select dataset" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="test20k">
-                              test20k both with rollforward 1-1-205
-                            </SelectItem>
-                            <SelectItem value="test10k">
-                              test10k dataset
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="dataset"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Dataset <span className="text-red-500">*</span>
+                      </Label>
+                      <Select
+                        value={formData.dataset}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, dataset: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select dataset" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white">
+                          <SelectItem value="test20k">
+                            test20k both with rollforward 1-1-205
+                          </SelectItem>
+                          <SelectItem value="test10k">
+                            test10k dataset
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
+                </div>
 
-                  {/* Calculation Settings Section */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                      Calculation Settings
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="perform"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Perform <span className="text-red-500">*</span>
-                        </Label>
-                        <Select
-                          value={formData.perform}
-                          onValueChange={(value) =>
-                            setFormData({ ...formData, perform: value })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select perform" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="current">Current</SelectItem>
-                            <SelectItem value="last">Last</SelectItem>
-                            <SelectItem value="both">Both</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                {/* Calculation Settings Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                    Calculation Settings
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="perform"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Perform <span className="text-red-500">*</span>
+                      </Label>
+                      <Select
+                        value={formData.perform}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, perform: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select perform" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white">
+                          <SelectItem value="current">Current</SelectItem>
+                          <SelectItem value="last">Last</SelectItem>
+                          <SelectItem value="both">Both</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="calculationBase"
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          Calculation Base{" "}
-                          <span className="text-red-500">*</span>
-                        </Label>
-                        <Select
-                          value={formData.calculationBase}
-                          onValueChange={(value) =>
-                            setFormData({ ...formData, calculationBase: value })
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select calculation base" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white">
-                            <SelectItem value="age">Age</SelectItem>
-                            <SelectItem value="service">Service</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="calculationBase"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Calculation Base{" "}
+                        <span className="text-red-500">*</span>
+                      </Label>
+                      <Select
+                        value={formData.calculationBase}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, calculationBase: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select calculation base" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white">
+                          <SelectItem value="age">Age</SelectItem>
+                          <SelectItem value="service">Service</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
+                </div>
 
-                  {/* Assumption Sets Section */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                      Assumption Sets
-                      <span className="text-sm font-normal text-slate-500 ml-2">
-                        (Optional)
-                      </span>
-                    </h3>
-                    <div className="grid grid-cols-1 gap-4">
-                      {showCurrentSections && (
+                {/* Assumption Sets Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                    Assumption Sets
+                    <span className="text-sm font-normal text-slate-500 ml-2">
+                      (Optional)
+                    </span>
+                  </h3>
+                  <div className="grid grid-cols-1 gap-4">
+                    {showCurrentSections && (
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="assumptionSet"
+                          className="text-sm font-medium text-slate-700"
+                        >
+                          Current Assumption Set
+                        </Label>
+                        <Select
+                          value={formData.assumptionSet}
+                          onValueChange={(value) =>
+                            setFormData({ ...formData, assumptionSet: value })
+                          }
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select assumption set" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white">
+                            <SelectItem value="current">
+                              current assumption_SHMA demo (Copy)
+                            </SelectItem>
+                            <SelectItem value="previous">
+                              previous assumption set
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+
+                    {showLastSections && (
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="lastAssumptionSet"
+                          className="text-sm font-medium text-slate-700"
+                        >
+                          Last Assumption Set
+                        </Label>
+                        <Select
+                          value={formData.lastAssumptionSet}
+                          onValueChange={(value) =>
+                            setFormData({
+                              ...formData,
+                              lastAssumptionSet: value,
+                            })
+                          }
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select last assumption set" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white">
+                            <SelectItem value="current">
+                              current assumption_SHMA demo (Copy)
+                            </SelectItem>
+                            <SelectItem value="previous">
+                              previous assumption set
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Required Fields for Disclosure Report Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                    Required Fields for Disclosure Report
+                    <span className="text-sm font-normal text-slate-500 ml-2">
+                      (Optional)
+                    </span>
+                  </h3>
+                  
+                  {/* Current Section */}
+                  {showCurrentSections && (
+                    <div className="space-y-4">
+                      <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label
-                            htmlFor="assumptionSet"
+                            htmlFor="currentFairValuePlanAssets"
                             className="text-sm font-medium text-slate-700"
                           >
-                            Current Assumption Set
+                            Fair Value of Any Plan Assets
                           </Label>
-                          <Select
-                            value={formData.assumptionSet}
-                            onValueChange={(value) =>
-                              setFormData({ ...formData, assumptionSet: value })
-                            }
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select assumption set" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white">
-                              <SelectItem value="current">
-                                current assumption_SHMA demo (Copy)
-                              </SelectItem>
-                              <SelectItem value="previous">
-                                previous assumption set
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      )}
-
-                      {showLastSections && (
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="lastAssumptionSet"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Last Assumption Set
-                          </Label>
-                          <Select
-                            value={formData.lastAssumptionSet}
-                            onValueChange={(value) =>
-                              setFormData({
-                                ...formData,
-                                lastAssumptionSet: value,
+                          <Input
+                            id="currentFairValuePlanAssets"
+                            type="number"
+                            placeholder="Enter fair value"
+                            value={formData.currentFairValuePlanAssets}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentFairValuePlanAssets: e.target.value 
                               })
                             }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentEmployeesTransferredFrom"
+                            className="text-sm font-medium text-slate-700"
                           >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select last assumption set" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white">
-                              <SelectItem value="current">
-                                current assumption_SHMA demo (Copy)
-                              </SelectItem>
-                              <SelectItem value="previous">
-                                previous assumption set
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                            Employees Transferred From
+                          </Label>
+                          <Input
+                            id="currentEmployeesTransferredFrom"
+                            type="number"
+                            placeholder="Enter number of employees"
+                            value={formData.currentEmployeesTransferredFrom}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentEmployeesTransferredFrom: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
                         </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Required Fields for Disclosure Report Section */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                      Required Fields for Disclosure Report
-                      <span className="text-sm font-normal text-slate-500 ml-2">
-                        (Optional)
-                      </span>
+                  {/* Last Section */}
+                  {showLastSections && (
+                    <div className="space-y-4">
+                      <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="lastOpeningNetAsset"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Opening Net Asset
+                          </Label>
+                          <Input
+                            id="lastOpeningNetAsset"
+                            type="number"
+                            placeholder="Enter opening net asset"
+                            value={formData.lastOpeningNetAsset}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                lastOpeningNetAsset: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="lastBenefitsPaidDuringYear"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Benefits Paid During the Year
+                          </Label>
+                          <Input
+                            id="lastBenefitsPaidDuringYear"
+                            type="number"
+                            placeholder="Enter benefits paid"
+                            value={formData.lastBenefitsPaidDuringYear}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                lastBenefitsPaidDuringYear: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Action Buttons Section */}
+                <div className="pt-6 border-t border-slate-200">
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold text-slate-800">
+                      Generate Reports
                     </h3>
-                    
-                    {/* Current Section */}
-                    {showCurrentSections && (
-                      <div className="space-y-4">
-                        <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label
-                              htmlFor="currentFairValuePlanAssets"
-                              className="text-sm font-medium text-slate-700"
-                            >
-                              Fair Value of Any Plan Assets
-                            </Label>
-                            <Input
-                              id="currentFairValuePlanAssets"
-                              type="number"
-                              placeholder="Enter fair value"
-                              value={formData.currentFairValuePlanAssets}
-                              onChange={(e) =>
-                                setFormData({ 
-                                  ...formData, 
-                                  currentFairValuePlanAssets: e.target.value 
-                                })
-                              }
-                              className="bg-white border-slate-300"
-                            />
-                          </div>
-
-                          <div className="space-y-2">
-                            <Label
-                              htmlFor="currentEmployeesTransferredFrom"
-                              className="text-sm font-medium text-slate-700"
-                            >
-                              Employees Transferred From
-                            </Label>
-                            <Input
-                              id="currentEmployeesTransferredFrom"
-                              type="number"
-                              placeholder="Enter number of employees"
-                              value={formData.currentEmployeesTransferredFrom}
-                              onChange={(e) =>
-                                setFormData({ 
-                                  ...formData, 
-                                  currentEmployeesTransferredFrom: e.target.value 
-                                })
-                              }
-                              className="bg-white border-slate-300"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Last Section */}
-                    {showLastSections && (
-                      <div className="space-y-4">
-                        <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label
-                              htmlFor="lastOpeningNetAsset"
-                              className="text-sm font-medium text-slate-700"
-                            >
-                              Opening Net Asset
-                            </Label>
-                            <Input
-                              id="lastOpeningNetAsset"
-                              type="number"
-                              placeholder="Enter opening net asset"
-                              value={formData.lastOpeningNetAsset}
-                              onChange={(e) =>
-                                setFormData({ 
-                                  ...formData, 
-                                  lastOpeningNetAsset: e.target.value 
-                                })
-                              }
-                              className="bg-white border-slate-300"
-                            />
-                          </div>
-
-                          <div className="space-y-2">
-                            <Label
-                              htmlFor="lastBenefitsPaidDuringYear"
-                              className="text-sm font-medium text-slate-700"
-                            >
-                              Benefits Paid During the Year
-                            </Label>
-                            <Input
-                              id="lastBenefitsPaidDuringYear"
-                              type="number"
-                              placeholder="Enter benefits paid"
-                              value={formData.lastBenefitsPaidDuringYear}
-                              onChange={(e) =>
-                                setFormData({ 
-                                  ...formData, 
-                                  lastBenefitsPaidDuringYear: e.target.value 
-                                })
-                              }
-                              className="bg-white border-slate-300"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Action Buttons Section */}
-                  <div className="pt-6 border-t border-slate-200">
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-semibold text-slate-800">
-                        Generate Reports
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Button
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white disabled:bg-slate-300 w-full h-12"
-                          onClick={handleCreateDisclosureReport}
-                          disabled={!isFormValid}
-                        >
-                          <FileText className="h-4 w-4 mr-2" />
-                          Create Disclosure Report
-                        </Button>
-                        <Button
-                          className="bg-blue-600 hover:bg-blue-700 text-white disabled:bg-slate-300 w-full h-12"
-                          onClick={handleCreateAdditionalDisclosure}
-                          disabled={!isFormValid}
-                        >
-                          <BarChart3 className="h-4 w-4 mr-2" />
-                          Create Additional Disclosure
-                        </Button>
-                      </div>
-                      {!isFormValid && (
-                        <p className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg">
-                          Please fill in all required fields (marked with *) to
-                          enable report generation.
-                        </p>
-                      )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <Button
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white disabled:bg-slate-300 w-full h-12"
+                        onClick={handleCreateDisclosureReport}
+                        disabled={!isFormValid}
+                      >
+                        <FileText className="h-4 w-4 mr-2" />
+                        Create Disclosure Report
+                      </Button>
+                      <Button
+                        className="bg-blue-600 hover:bg-blue-700 text-white disabled:bg-slate-300 w-full h-12"
+                        onClick={handleCreateAdditionalDisclosure}
+                        disabled={!isFormValid}
+                      >
+                        <BarChart3 className="h-4 w-4 mr-2" />
+                        Create Additional Disclosure
+                      </Button>
                     </div>
+                    {!isFormValid && (
+                      <p className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg">
+                        Please fill in all required fields (marked with *) to
+                        enable report generation.
+                      </p>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
