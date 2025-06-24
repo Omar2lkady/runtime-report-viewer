@@ -157,421 +157,387 @@ const Index = () => {
 
   if (showOutput) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex">
-        {/* Sidebar */}
-        <div className="w-64 bg-white shadow-lg border-r border-slate-200 flex flex-col">
-          <div className="p-6 border-b border-slate-200">
-            <h2 className="text-xl font-bold text-slate-800">
-              End of service benefits
-            </h2>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="container mx-auto px-6 py-6">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold text-slate-800">
+              Runtime Output
+            </h1>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={handleBackToListing}
+                className="bg-white hover:bg-slate-50"
+              >
+                Back to listing
+              </Button>
+              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                Export
+              </Button>
+            </div>
           </div>
-          <nav className="flex-1 p-4">
-            <ul className="space-y-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => setActiveMenuItem(item.name)}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                        activeMenuItem === item.name
-                          ? "bg-emerald-100 text-emerald-800 font-medium"
-                          : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
-                      {item.name}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
 
-        {/* Main Content */}
-        <div className="flex-1 overflow-auto">
-          <div className="container mx-auto px-6 py-6">
+          {/* Summary Cards */}
+          <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-3xl font-bold text-slate-800">
-                Runtime Output
-              </h1>
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  onClick={handleBackToListing}
-                  className="bg-white hover:bg-slate-50"
-                >
-                  Back to listing
-                </Button>
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  Export
-                </Button>
-              </div>
+              <h2 className="text-2xl font-bold text-slate-800">
+                Runtime Summary
+              </h2>
+              <Button
+                onClick={handleViewDataDetails}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                View Data Details
+              </Button>
             </div>
 
-            {/* Summary Cards */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-slate-800">
-                  Runtime Summary
-                </h2>
-                <Button
-                  onClick={handleViewDataDetails}
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <Eye className="h-4 w-4 mr-2" />
-                  View Data Details
-                </Button>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* PVDBO_T Comparison */}
+              <Card className="bg-white shadow-lg border-0">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg text-slate-800">
+                    Present Value of DBO
+                  </CardTitle>
+                  <CardDescription>
+                    Total present value of defined benefit obligation
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-cyan-50 to-cyan-100 rounded-lg">
+                    <div>
+                      <div className="text-sm text-cyan-700 font-medium">
+                        Current
+                      </div>
+                      <div className="text-xl font-bold text-cyan-800">
+                        875,395,402.84
+                      </div>
+                    </div>
+                    <div className="text-cyan-600">
+                      <TrendingUp className="h-6 w-6" />
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <div>
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
+                      </div>
+                      <div className="text-xl font-bold text-slate-700">
+                        675,385,402.84
+                      </div>
+                    </div>
+                    <div className="text-emerald-600 text-sm font-semibold">
+                      +29.6%
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* PVDBO_T Comparison */}
-                <Card className="bg-white shadow-lg border-0">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg text-slate-800">
-                      Present Value of DBO
-                    </CardTitle>
-                    <CardDescription>
-                      Total present value of defined benefit obligation
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex justify-between items-center p-3 bg-gradient-to-r from-cyan-50 to-cyan-100 rounded-lg">
-                      <div>
-                        <div className="text-sm text-cyan-700 font-medium">
-                          Current
-                        </div>
-                        <div className="text-xl font-bold text-cyan-800">
-                          875,395,402.84
-                        </div>
+              {/* Service Cost Comparison */}
+              <Card className="bg-white shadow-lg border-0">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg text-slate-800">
+                    Service Cost
+                  </CardTitle>
+                  <CardDescription>
+                    Current and past service cost totals
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
+                    <div>
+                      <div className="text-sm text-emerald-700 font-medium">
+                        Current
                       </div>
-                      <div className="text-cyan-600">
-                        <TrendingUp className="h-6 w-6" />
+                      <div className="text-xl font-bold text-emerald-800">
+                        207,894,356.63
                       </div>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                      <div>
-                        <div className="text-sm text-slate-600 font-medium">
-                          Last
-                        </div>
-                        <div className="text-xl font-bold text-slate-700">
-                          675,385,402.84
-                        </div>
+                    <div className="text-emerald-600">
+                      <BarChart3 className="h-6 w-6" />
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <div>
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
                       </div>
-                      <div className="text-emerald-600 text-sm font-semibold">
-                        +29.6%
+                      <div className="text-xl font-bold text-slate-700">
+                        247,894,356.63
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                    <div className="text-red-600 text-sm font-semibold">
+                      -16.1%
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-                {/* Service Cost Comparison */}
-                <Card className="bg-white shadow-lg border-0">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg text-slate-800">
-                      Service Cost
-                    </CardTitle>
-                    <CardDescription>
-                      Current and past service cost totals
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
-                      <div>
-                        <div className="text-sm text-emerald-700 font-medium">
-                          Current
-                        </div>
-                        <div className="text-xl font-bold text-emerald-800">
-                          207,894,356.63
-                        </div>
+              {/* Employee Count Comparison */}
+              <Card className="bg-white shadow-lg border-0">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg text-slate-800">
+                    Total Employees
+                  </CardTitle>
+                  <CardDescription>
+                    Active employee count in the plan
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg">
+                    <div>
+                      <div className="text-sm text-amber-700 font-medium">
+                        Current
                       </div>
-                      <div className="text-emerald-600">
-                        <BarChart3 className="h-6 w-6" />
+                      <div className="text-xl font-bold text-amber-800">
+                        20,001
                       </div>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                      <div>
-                        <div className="text-sm text-slate-600 font-medium">
-                          Last
-                        </div>
-                        <div className="text-xl font-bold text-slate-700">
-                          247,894,356.63
-                        </div>
+                    <div className="text-amber-600">
+                      <PieChart className="h-6 w-6" />
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <div>
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
                       </div>
-                      <div className="text-red-600 text-sm font-semibold">
-                        -16.1%
+                      <div className="text-xl font-bold text-slate-700">
+                        20,501
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                {/* Employee Count Comparison */}
-                <Card className="bg-white shadow-lg border-0">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg text-slate-800">
-                      Total Employees
-                    </CardTitle>
-                    <CardDescription>
-                      Active employee count in the plan
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex justify-between items-center p-3 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg">
-                      <div>
-                        <div className="text-sm text-amber-700 font-medium">
-                          Current
-                        </div>
-                        <div className="text-xl font-bold text-amber-800">
-                          20,001
-                        </div>
-                      </div>
-                      <div className="text-amber-600">
-                        <PieChart className="h-6 w-6" />
-                      </div>
+                    <div className="text-red-600 text-sm font-semibold">
+                      -2.4%
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                      <div>
-                        <div className="text-sm text-slate-600 font-medium">
-                          Last
-                        </div>
-                        <div className="text-xl font-bold text-slate-700">
-                          20,501
-                        </div>
-                      </div>
-                      <div className="text-red-600 text-sm font-semibold">
-                        -2.4%
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
+          </div>
 
-            {/* Report Tabs */}
-            <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className="space-y-6"
-            >
-              <TabsList className="grid w-full grid-cols-5 bg-white border">
-                <TabsTrigger
-                  value="disclosure"
-                  className="flex items-center gap-2"
-                >
-                  {getTabIcon("disclosure", reportStatus.disclosure)}
-                  Disclosure
-                </TabsTrigger>
-                <TabsTrigger
-                  value="comprehensive"
-                  className="flex items-center gap-2"
-                >
-                  {getTabIcon("comprehensive", reportStatus.comprehensive)}
-                  Other Comprehensive Income (OCI)
-                </TabsTrigger>
-                <TabsTrigger
-                  value="maturity"
-                  className="flex items-center gap-2"
-                >
-                  {getTabIcon("maturity", reportStatus.maturity)}
-                  Maturity
-                </TabsTrigger>
-                <TabsTrigger
-                  value="sensitivity"
-                  className="flex items-center gap-2"
-                >
-                  {getTabIcon("sensitivity", reportStatus.sensitivity)}
-                  Sensitivity Analysis
-                </TabsTrigger>
-                <TabsTrigger
-                  value="liability"
-                  className="flex items-center gap-2"
-                >
-                  <FileText className="h-4 w-4 text-slate-500" />
-                  Liability Movement
-                </TabsTrigger>
-              </TabsList>
+          {/* Report Tabs */}
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="space-y-6"
+          >
+            <TabsList className="grid w-full grid-cols-5 bg-white border">
+              <TabsTrigger
+                value="disclosure"
+                className="flex items-center gap-2"
+              >
+                {getTabIcon("disclosure", reportStatus.disclosure)}
+                Disclosure
+              </TabsTrigger>
+              <TabsTrigger
+                value="comprehensive"
+                className="flex items-center gap-2"
+              >
+                {getTabIcon("comprehensive", reportStatus.comprehensive)}
+                Other Comprehensive Income (OCI)
+              </TabsTrigger>
+              <TabsTrigger
+                value="maturity"
+                className="flex items-center gap-2"
+              >
+                {getTabIcon("maturity", reportStatus.maturity)}
+                Maturity
+              </TabsTrigger>
+              <TabsTrigger
+                value="sensitivity"
+                className="flex items-center gap-2"
+              >
+                {getTabIcon("sensitivity", reportStatus.sensitivity)}
+                Sensitivity Analysis
+              </TabsTrigger>
+              <TabsTrigger
+                value="liability"
+                className="flex items-center gap-2"
+              >
+                <FileText className="h-4 w-4 text-slate-500" />
+                Liability Movement
+              </TabsTrigger>
+            </TabsList>
 
-              <TabsContent value="disclosure">
-                <DisclosureReport />
-              </TabsContent>
+            <TabsContent value="disclosure">
+              <DisclosureReport />
+            </TabsContent>
 
-              <TabsContent value="comprehensive">
-                {reportStatus.comprehensive === "completed" ? (
-                  <OtherComprehensiveReport />
-                ) : (
-                  <Card className="bg-white shadow-lg border-0">
-                    <CardContent className="p-12 text-center">
-                      <div className="max-w-md mx-auto">
-                        {reportStatus.comprehensive === "loading" ? (
-                          <>
-                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Generating Other Comprehensive Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.comprehensive.description}
-                            </p>
-                            <div className="bg-blue-50 p-4 rounded-lg">
-                              <p className="text-sm text-blue-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.comprehensive.time}
-                              </p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Other Comprehensive Income (OCI) Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.comprehensive.description}
-                            </p>
-                            <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                              <p className="text-sm text-amber-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.comprehensive.time}
-                              </p>
-                            </div>
-                            <Button
-                              onClick={() => handleStartReport("comprehensive")}
-                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                            >
-                              <PlayCircle className="h-4 w-4 mr-2" />
-                              Start Report Generation
-                            </Button>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </TabsContent>
-
-              <TabsContent value="maturity">
-                {reportStatus.maturity === "completed" ? (
-                  <MaturityProfileReport />
-                ) : (
-                  <Card className="bg-white shadow-lg border-0">
-                    <CardContent className="p-12 text-center">
-                      <div className="max-w-md mx-auto">
-                        {reportStatus.maturity === "loading" ? (
-                          <>
-                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Generating Maturity Profile Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.maturity.description}
-                            </p>
-                            <div className="bg-blue-50 p-4 rounded-lg">
-                              <p className="text-sm text-blue-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.maturity.time}
-                              </p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <TrendingUp className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Maturity Profile Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.maturity.description}
-                            </p>
-                            <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                              <p className="text-sm text-amber-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.maturity.time}
-                              </p>
-                            </div>
-                            <Button
-                              onClick={() => handleStartReport("maturity")}
-                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                            >
-                              <PlayCircle className="h-4 w-4 mr-2" />
-                              Start Report Generation
-                            </Button>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </TabsContent>
-
-              <TabsContent value="sensitivity">
-                {reportStatus.sensitivity === "completed" ? (
-                  <SensitivityAnalysisReport />
-                ) : (
-                  <Card className="bg-white shadow-lg border-0">
-                    <CardContent className="p-12 text-center">
-                      <div className="max-w-md mx-auto">
-                        {reportStatus.sensitivity === "loading" ? (
-                          <>
-                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Generating Sensitivity Analysis Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.sensitivity.description}
-                            </p>
-                            <div className="bg-blue-50 p-4 rounded-lg">
-                              <p className="text-sm text-blue-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.sensitivity.time}
-                              </p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                              Sensitivity Analysis Report
-                            </h3>
-                            <p className="text-slate-600 mb-6">
-                              {reportTimeEstimates.sensitivity.description}
-                            </p>
-                            <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                              <p className="text-sm text-amber-800">
-                                Estimated time:{" "}
-                                {reportTimeEstimates.sensitivity.time}
-                              </p>
-                            </div>
-                            <Button
-                              onClick={() => handleStartReport("sensitivity")}
-                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                            >
-                              <PlayCircle className="h-4 w-4 mr-2" />
-                              Start Report Generation
-                            </Button>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-              </TabsContent>
-
-              <TabsContent value="liability">
+            <TabsContent value="comprehensive">
+              {reportStatus.comprehensive === "completed" ? (
+                <OtherComprehensiveReport />
+              ) : (
                 <Card className="bg-white shadow-lg border-0">
                   <CardContent className="p-12 text-center">
                     <div className="max-w-md mx-auto">
-                      <FileText className="h-16 w-16 mx-auto text-emerald-600 mb-6" />
-                      <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                        Liability Movement (Placeholder)
-                      </h3>
-                      <p className="text-slate-600 mb-6">
-                        This is a placeholder for the Liability Movement report tab. Please provide report details or component to be shown here.
-                      </p>
+                      {reportStatus.comprehensive === "loading" ? (
+                        <>
+                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Generating Other Comprehensive Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.comprehensive.description}
+                          </p>
+                          <div className="bg-blue-50 p-4 rounded-lg">
+                            <p className="text-sm text-blue-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.comprehensive.time}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Other Comprehensive Income (OCI) Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.comprehensive.description}
+                          </p>
+                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
+                            <p className="text-sm text-amber-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.comprehensive.time}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => handleStartReport("comprehensive")}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                          >
+                            <PlayCircle className="h-4 w-4 mr-2" />
+                            Start Report Generation
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="maturity">
+              {reportStatus.maturity === "completed" ? (
+                <MaturityProfileReport />
+              ) : (
+                <Card className="bg-white shadow-lg border-0">
+                  <CardContent className="p-12 text-center">
+                    <div className="max-w-md mx-auto">
+                      {reportStatus.maturity === "loading" ? (
+                        <>
+                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Generating Maturity Profile Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.maturity.description}
+                          </p>
+                          <div className="bg-blue-50 p-4 rounded-lg">
+                            <p className="text-sm text-blue-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.maturity.time}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <TrendingUp className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Maturity Profile Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.maturity.description}
+                          </p>
+                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
+                            <p className="text-sm text-amber-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.maturity.time}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => handleStartReport("maturity")}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                          >
+                            <PlayCircle className="h-4 w-4 mr-2" />
+                            Start Report Generation
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </TabsContent>
+
+            <TabsContent value="sensitivity">
+              {reportStatus.sensitivity === "completed" ? (
+                <SensitivityAnalysisReport />
+              ) : (
+                <Card className="bg-white shadow-lg border-0">
+                  <CardContent className="p-12 text-center">
+                    <div className="max-w-md mx-auto">
+                      {reportStatus.sensitivity === "loading" ? (
+                        <>
+                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Generating Sensitivity Analysis Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.sensitivity.description}
+                          </p>
+                          <div className="bg-blue-50 p-4 rounded-lg">
+                            <p className="text-sm text-blue-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.sensitivity.time}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                            Sensitivity Analysis Report
+                          </h3>
+                          <p className="text-slate-600 mb-6">
+                            {reportTimeEstimates.sensitivity.description}
+                          </p>
+                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
+                            <p className="text-sm text-amber-800">
+                              Estimated time:{" "}
+                              {reportTimeEstimates.sensitivity.time}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => handleStartReport("sensitivity")}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                          >
+                            <PlayCircle className="h-4 w-4 mr-2" />
+                            Start Report Generation
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </TabsContent>
+
+            <TabsContent value="liability">
+              <Card className="bg-white shadow-lg border-0">
+                <CardContent className="p-12 text-center">
+                  <div className="max-w-md mx-auto">
+                    <FileText className="h-16 w-16 mx-auto text-emerald-600 mb-6" />
+                    <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                      Liability Movement (Placeholder)
+                    </h3>
+                    <p className="text-slate-600 mb-6">
+                      This is a placeholder for the Liability Movement report tab. Please provide report details or component to be shown here.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     );
