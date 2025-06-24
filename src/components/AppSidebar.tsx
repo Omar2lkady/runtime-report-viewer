@@ -6,7 +6,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -26,23 +25,28 @@ const navigationItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="w-64">
-      <SidebarContent>
-        <SidebarGroup>
+    <Sidebar className="w-64 border-r border-gray-200">
+      <div className="p-6 border-b border-gray-200">
+        <h2 className="text-lg font-semibold text-gray-900">End of service benefits</h2>
+      </div>
+      <SidebarContent className="p-0">
+        <SidebarGroup className="p-0">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1 p-4">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild className="p-0">
                     <NavLink 
                       to={item.url}
                       className={({ isActive }) =>
-                        isActive 
-                          ? "bg-green-100 text-green-700 font-medium border-r-2 border-green-500" 
-                          : "text-gray-600 hover:bg-gray-50"
+                        `flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
+                          isActive 
+                            ? "bg-green-100 text-green-700" 
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        }`
                       }
                     >
-                      <item.icon className="h-5 w-5" />
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
                       <span>{item.title}</span>
                     </NavLink>
                   </SidebarMenuButton>
