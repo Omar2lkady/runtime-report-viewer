@@ -65,6 +65,9 @@ const Index = () => {
     // New fields for disclosure report
     currentFairValuePlanAssets: "",
     currentEmployeesTransferredFrom: "",
+    currentEosbPaidPayable: "",
+    currentPastServiceCost: "",
+    currentCurtailmentSettlementGain: "",
     lastOpeningNetAsset: "",
     lastBenefitsPaidDuringYear: "",
   });
@@ -819,6 +822,72 @@ const Index = () => {
                               setFormData({ 
                                 ...formData, 
                                 currentEmployeesTransferredFrom: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentEosbPaidPayable"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            EOSB Paid/Payable for Leavers
+                          </Label>
+                          <Input
+                            id="currentEosbPaidPayable"
+                            type="number"
+                            placeholder="Enter EOSB amount"
+                            value={formData.currentEosbPaidPayable}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentEosbPaidPayable: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentPastServiceCost"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Past Service Cost
+                          </Label>
+                          <Input
+                            id="currentPastServiceCost"
+                            type="number"
+                            placeholder="Enter past service cost"
+                            value={formData.currentPastServiceCost}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentPastServiceCost: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2 md:col-span-2">
+                          <Label
+                            htmlFor="currentCurtailmentSettlementGain"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Curtailment / Settlement Gain / Loss
+                          </Label>
+                          <Input
+                            id="currentCurtailmentSettlementGain"
+                            type="number"
+                            placeholder="Enter curtailment/settlement amount"
+                            value={formData.currentCurtailmentSettlementGain}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentCurtailmentSettlementGain: e.target.value 
                               })
                             }
                             className="bg-white border-slate-300"
