@@ -86,15 +86,12 @@ const Index = () => {
 
   const reportTimeEstimates = {
     sensitivity: {
-      time: "3-5 minutes",
       description: "Analyzing parameter sensitivity across different scenarios",
     },
     maturity: {
-      time: "2-3 minutes",
       description: "Generating cash flow maturity profiles and projections",
     },
     comprehensive: {
-      time: "4-6 minutes",
       description: "Computing detailed comprehensive income breakdown analysis",
     },
   };
@@ -382,12 +379,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.comprehensive.description}
                           </p>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <p className="text-sm text-blue-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.comprehensive.time}
-                            </p>
-                          </div>
                         </>
                       ) : (
                         <>
@@ -398,12 +389,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.comprehensive.description}
                           </p>
-                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                            <p className="text-sm text-amber-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.comprehensive.time}
-                            </p>
-                          </div>
                           <Button
                             onClick={() => handleStartReport("comprehensive")}
                             className="bg-emerald-600 hover:bg-emerald-700 text-white"
@@ -435,12 +420,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.maturity.description}
                           </p>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <p className="text-sm text-blue-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.maturity.time}
-                            </p>
-                          </div>
                         </>
                       ) : (
                         <>
@@ -451,12 +430,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.maturity.description}
                           </p>
-                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                            <p className="text-sm text-amber-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.maturity.time}
-                            </p>
-                          </div>
                           <Button
                             onClick={() => handleStartReport("maturity")}
                             className="bg-emerald-600 hover:bg-emerald-700 text-white"
@@ -488,12 +461,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.sensitivity.description}
                           </p>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <p className="text-sm text-blue-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.sensitivity.time}
-                            </p>
-                          </div>
                         </>
                       ) : (
                         <>
@@ -504,12 +471,6 @@ const Index = () => {
                           <p className="text-slate-600 mb-6">
                             {reportTimeEstimates.sensitivity.description}
                           </p>
-                          <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                            <p className="text-sm text-amber-800">
-                              Estimated time:{" "}
-                              {reportTimeEstimates.sensitivity.time}
-                            </p>
-                          </div>
                           <Button
                             onClick={() => handleStartReport("sensitivity")}
                             className="bg-emerald-600 hover:bg-emerald-700 text-white"
