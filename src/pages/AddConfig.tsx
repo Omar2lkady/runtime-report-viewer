@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const AddConfig = () => {
   const [title, setTitle] = useState("");
@@ -128,93 +127,84 @@ const AddConfig = () => {
                 Sensitivity Report Configuration <span className="text-gray-400">(Optional)</span>
               </h3>
               
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="sensitivity-config" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <span className="text-base font-medium">Sensitivity Report Configuration</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="pt-4">
-                    <div className="space-y-6">
-                      {/* Header Row */}
-                      <div className="grid grid-cols-3 gap-4 pb-2 border-b">
-                        <div className="font-medium text-gray-600">Sign</div>
-                        <div className="font-medium text-gray-600">Percentage</div>
-                        <div className="font-medium text-gray-600">Particulars</div>
-                      </div>
+              <div className="border rounded-lg p-4 space-y-6">
+                {/* Header Row */}
+                <div className="grid grid-cols-3 gap-4 pb-2 border-b">
+                  <div className="font-medium text-gray-600">Sign</div>
+                  <div className="font-medium text-gray-600">Percentage</div>
+                  <div className="font-medium text-gray-600">Particulars</div>
+                </div>
 
-                      {/* Discount Rate Row 1 */}
-                      <div className="grid grid-cols-3 gap-4 items-center">
-                        <div className="text-gray-600">(+/-)</div>
-                        <div>
-                          <Input
-                            type="number"
-                            value={discountRate1}
-                            onChange={(e) => setDiscountRate1(e.target.value)}
-                            className="w-full"
-                          />
-                        </div>
-                        <div className="text-gray-600">Discount Rate</div>
-                      </div>
+                {/* Discount Rate Row 1 */}
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <div className="text-gray-600">(+/-)</div>
+                  <div>
+                    <Input
+                      type="number"
+                      value={discountRate1}
+                      onChange={(e) => setDiscountRate1(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">Discount Rate</div>
+                </div>
 
-                      {/* Salary Increase Rate Row */}
-                      <div className="grid grid-cols-3 gap-4 items-center">
-                        <div className="text-gray-600">(+/-)</div>
-                        <div>
-                          <Input
-                            type="number"
-                            value={discountRate2}
-                            onChange={(e) => setDiscountRate2(e.target.value)}
-                            className="w-full"
-                          />
-                        </div>
-                        <div className="text-gray-600">Salary Increase Rate</div>
-                      </div>
+                {/* Salary Increase Rate Row */}
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <div className="text-gray-600">(+/-)</div>
+                  <div>
+                    <Input
+                      type="number"
+                      value={discountRate2}
+                      onChange={(e) => setDiscountRate2(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">Salary Increase Rate</div>
+                </div>
 
-                      {/* Withdrawal Rates Row */}
-                      <div className="grid grid-cols-3 gap-4 items-center">
-                        <div className="text-gray-600">(+/-)</div>
-                        <div>
-                          <Input
-                            type="number"
-                            value={withdrawalRates1}
-                            onChange={(e) => setWithdrawalRates1(e.target.value)}
-                            className="w-full"
-                          />
-                        </div>
-                        <div className="text-gray-600">Withdrawal Rates</div>
-                      </div>
+                {/* Withdrawal Rates Row */}
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <div className="text-gray-600">(+/-)</div>
+                  <div>
+                    <Input
+                      type="number"
+                      value={withdrawalRates1}
+                      onChange={(e) => setWithdrawalRates1(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">Withdrawal Rates</div>
+                </div>
 
-                      {/* Mortality Rates set back Row */}
-                      <div className="grid grid-cols-3 gap-4 items-center">
-                        <div className="text-gray-600">(+)</div>
-                        <div>
-                          <Input
-                            type="number"
-                            value={mortalitySetBack}
-                            onChange={(e) => setMortalitySetBack(e.target.value)}
-                            className="w-full"
-                          />
-                        </div>
-                        <div className="text-gray-600">Mortality Rates set back</div>
-                      </div>
+                {/* Mortality Rates set back Row */}
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <div className="text-gray-600">(+)</div>
+                  <div>
+                    <Input
+                      type="number"
+                      value={mortalitySetBack}
+                      onChange={(e) => setMortalitySetBack(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">Mortality Rates set back</div>
+                </div>
 
-                      {/* Mortality Rates set forward Row */}
-                      <div className="grid grid-cols-3 gap-4 items-center">
-                        <div className="text-gray-600">(-)</div>
-                        <div>
-                          <Input
-                            type="number"
-                            value={mortalitySetForward}
-                            onChange={(e) => setMortalitySetForward(e.target.value)}
-                            className="w-full"
-                          />
-                        </div>
-                        <div className="text-gray-600">Mortality Rates set forward</div>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                {/* Mortality Rates set forward Row */}
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <div className="text-gray-600">(-)</div>
+                  <div>
+                    <Input
+                      type="number"
+                      value={mortalitySetForward}
+                      onChange={(e) => setMortalitySetForward(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">Mortality Rates set forward</div>
+                </div>
+              </div>
             </div>
           </form>
         </CardContent>
