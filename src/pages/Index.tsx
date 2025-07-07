@@ -728,32 +728,27 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Disclosure Report Title Section */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                {/* Disclosure Report Title Field */}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="disclosureReportTitle"
+                    className="text-sm font-medium text-slate-700"
+                  >
                     Disclosure Report Title
-                  </h3>
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="disclosureReportTitle"
-                      className="text-sm font-medium text-slate-700"
-                    >
-                      Report Title
-                    </Label>
-                    <Input
-                      id="disclosureReportTitle"
-                      type="text"
-                      placeholder="e.g., Cement Product"
-                      value={formData.disclosureReportTitle}
-                      onChange={(e) =>
-                        setFormData({ 
-                          ...formData, 
-                          disclosureReportTitle: e.target.value 
-                        })
-                      }
-                      className="bg-white border-slate-300"
-                    />
-                  </div>
+                  </Label>
+                  <Input
+                    id="disclosureReportTitle"
+                    type="text"
+                    placeholder="e.g., Cement Product"
+                    value={formData.disclosureReportTitle}
+                    onChange={(e) =>
+                      setFormData({ 
+                        ...formData, 
+                        disclosureReportTitle: e.target.value 
+                      })
+                    }
+                    className="bg-white border-slate-300"
+                  />
                 </div>
 
                 {/* Required Fields for Disclosure Report Section */}
