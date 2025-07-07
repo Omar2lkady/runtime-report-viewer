@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,8 +73,6 @@ const Index = () => {
     currentEosbPaidPayable: "",
     currentPastServiceCost: "",
     currentCurtailmentSettlementGain: "",
-    lastOpeningNetAsset: "",
-    lastBenefitsPaidDuringYear: "",
   });
 
   const menuItems = [
@@ -669,9 +666,6 @@ const Index = () => {
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
                     Assumption Sets
-                    <span className="text-sm font-normal text-slate-500 ml-2">
-                      (Optional)
-                    </span>
                   </h3>
                   <div className="grid grid-cols-1 gap-4">
                     {showCurrentSections && (
@@ -954,58 +948,6 @@ const Index = () => {
                               setFormData({ 
                                 ...formData, 
                                 currentCurtailmentSettlementGain: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Last Section */}
-                  {showLastSections && (
-                    <div className="space-y-4">
-                      <h4 className="text-md font-medium text-slate-700 mt-6">Last</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="lastOpeningNetAsset"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Opening Net Asset
-                          </Label>
-                          <Input
-                            id="lastOpeningNetAsset"
-                            type="number"
-                            placeholder="Enter opening net asset"
-                            value={formData.lastOpeningNetAsset}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                lastOpeningNetAsset: e.target.value 
-                              })
-                            }
-                            className="bg-white border-slate-300"
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label
-                            htmlFor="lastBenefitsPaidDuringYear"
-                            className="text-sm font-medium text-slate-700"
-                          >
-                            Benefits Paid During the Year
-                          </Label>
-                          <Input
-                            id="lastBenefitsPaidDuringYear"
-                            type="number"
-                            placeholder="Enter benefits paid"
-                            value={formData.lastBenefitsPaidDuringYear}
-                            onChange={(e) =>
-                              setFormData({ 
-                                ...formData, 
-                                lastBenefitsPaidDuringYear: e.target.value 
                               })
                             }
                             className="bg-white border-slate-300"
