@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,6 +63,11 @@ const Index = () => {
     assumptionSet: "current",
     lastAssumptionSet: "current",
     calculationBase: "age",
+    // Header Configuration fields
+    companyName: "",
+    title1: "",
+    title2: "",
+    headerOfColumn: "",
     // New fields for disclosure report
     currentFairValuePlanAssets: "",
     currentEmployeesTransferredFrom: "",
@@ -728,6 +734,105 @@ const Index = () => {
                         </Select>
                       </div>
                     )}
+                  </div>
+                </div>
+
+                {/* Header Configuration Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
+                    Header Configuration
+                    <span className="text-sm font-normal text-slate-500 ml-2">
+                      (Optional)
+                    </span>
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="companyName"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Company Name
+                      </Label>
+                      <Input
+                        id="companyName"
+                        type="text"
+                        placeholder="e.g., Cement Product"
+                        value={formData.companyName}
+                        onChange={(e) =>
+                          setFormData({ 
+                            ...formData, 
+                            companyName: e.target.value 
+                          })
+                        }
+                        className="bg-white border-slate-300"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="title1"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Title 1
+                      </Label>
+                      <Input
+                        id="title1"
+                        type="text"
+                        placeholder="e.g., GRATUITY SCHEME VALUATION AS AT December 31 2021"
+                        value={formData.title1}
+                        onChange={(e) =>
+                          setFormData({ 
+                            ...formData, 
+                            title1: e.target.value 
+                          })
+                        }
+                        className="bg-white border-slate-300"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="title2"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Title 2
+                      </Label>
+                      <Input
+                        id="title2"
+                        type="text"
+                        placeholder="e.g., DISCLOSURE AS PER IAS 19 (Revised 2011)"
+                        value={formData.title2}
+                        onChange={(e) =>
+                          setFormData({ 
+                            ...formData, 
+                            title2: e.target.value 
+                          })
+                        }
+                        className="bg-white border-slate-300"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="headerOfColumn"
+                        className="text-sm font-medium text-slate-700"
+                      >
+                        Header of Column
+                      </Label>
+                      <Input
+                        id="headerOfColumn"
+                        type="text"
+                        placeholder="e.g., Amount in SAR"
+                        value={formData.headerOfColumn}
+                        onChange={(e) =>
+                          setFormData({ 
+                            ...formData, 
+                            headerOfColumn: e.target.value 
+                          })
+                        }
+                        className="bg-white border-slate-300"
+                      />
+                    </div>
                   </div>
                 </div>
 
