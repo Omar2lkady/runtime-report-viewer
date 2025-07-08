@@ -322,7 +322,7 @@ const Index = () => {
             onValueChange={setActiveTab}
             className="space-y-6"
           >
-            <TabsList className="grid w-full grid-cols-5 bg-white border">
+            <TabsList className="grid w-full grid-cols-4 bg-white border">
               <TabsTrigger
                 value="disclosure"
                 className="flex items-center gap-2"
@@ -350,13 +350,6 @@ const Index = () => {
               >
                 {getTabIcon("sensitivity", reportStatus.sensitivity)}
                 Sensitivity Analysis
-              </TabsTrigger>
-              <TabsTrigger
-                value="liability"
-                className="flex items-center gap-2"
-              >
-                <FileText className="h-4 w-4 text-slate-500" />
-                Liability Movement
               </TabsTrigger>
             </TabsList>
 
@@ -485,22 +478,6 @@ const Index = () => {
                   </CardContent>
                 </Card>
               )}
-            </TabsContent>
-
-            <TabsContent value="liability">
-              <Card className="bg-white shadow-lg border-0">
-                <CardContent className="p-12 text-center">
-                  <div className="max-w-md mx-auto">
-                    <FileText className="h-16 w-16 mx-auto text-emerald-600 mb-6" />
-                    <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                      Liability Movement (Placeholder)
-                    </h3>
-                    <p className="text-slate-600 mb-6">
-                      This is a placeholder for the Liability Movement report tab. Please provide report details or component to be shown here.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
             </TabsContent>
           </Tabs>
         </div>
