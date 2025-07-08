@@ -875,7 +875,7 @@ const Index = () => {
                           />
                         </div>
 
-                        <div className="space-y-2 md:col-span-2">
+                        <div className="space-y-2">
                           <Label
                             htmlFor="currentCurtailmentSettlementGain"
                             className="text-sm font-medium text-slate-700"
