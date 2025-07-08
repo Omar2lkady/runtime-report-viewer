@@ -754,7 +754,7 @@ const Index = () => {
                 {/* Required Fields for Disclosure Report Section */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">
-                    Required Fields for Disclosure Report
+                    Required Fields for Disclosure Report (Current)
                     <span className="text-sm font-normal text-slate-500 ml-2">
                       (Optional)
                     </span>
@@ -763,7 +763,6 @@ const Index = () => {
                   {/* Current Section */}
                   {showCurrentSections && (
                     <div className="space-y-4">
-                      <h4 className="text-md font-medium text-slate-700 mt-6">Current</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label
