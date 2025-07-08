@@ -67,6 +67,7 @@ const Index = () => {
     // New fields for disclosure report
     currentFairValuePlanAssets: "",
     currentEmployeesTransferredFrom: "",
+    currentSecondEmployeesTransferredFrom: "",
     currentEosbPaidPayable: "",
     currentPastServiceCost: "",
     currentCurtailmentSettlementGain: "",
@@ -791,7 +792,7 @@ const Index = () => {
                             htmlFor="currentEmployeesTransferredFrom"
                             className="text-sm font-medium text-slate-700"
                           >
-                            Employees Transferred From
+                            First Employees Transferred From
                           </Label>
                           <Input
                             id="currentEmployeesTransferredFrom"
@@ -802,6 +803,28 @@ const Index = () => {
                               setFormData({ 
                                 ...formData, 
                                 currentEmployeesTransferredFrom: e.target.value 
+                              })
+                            }
+                            className="bg-white border-slate-300"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="currentSecondEmployeesTransferredFrom"
+                            className="text-sm font-medium text-slate-700"
+                          >
+                            Second Employees Transferred From
+                          </Label>
+                          <Input
+                            id="currentSecondEmployeesTransferredFrom"
+                            type="number"
+                            placeholder="Enter number of employees"
+                            value={formData.currentSecondEmployeesTransferredFrom || ""}
+                            onChange={(e) =>
+                              setFormData({ 
+                                ...formData, 
+                                currentSecondEmployeesTransferredFrom: e.target.value 
                               })
                             }
                             className="bg-white border-slate-300"
