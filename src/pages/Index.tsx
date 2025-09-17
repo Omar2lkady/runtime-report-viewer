@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   PlayCircle,
   FileText,
@@ -316,170 +315,175 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Report Tabs */}
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="space-y-6"
-          >
-            <TabsList className="grid w-full grid-cols-4 bg-white border">
-              <TabsTrigger
-                value="disclosure"
-                className="flex items-center gap-2"
-              >
-                {getTabIcon("disclosure", reportStatus.disclosure)}
-                Disclosure
-              </TabsTrigger>
-              <TabsTrigger
-                value="comprehensive"
-                className="flex items-center gap-2"
-              >
-                {getTabIcon("comprehensive", reportStatus.comprehensive)}
-                Other Comprehensive Income (OCI)
-              </TabsTrigger>
-              <TabsTrigger
-                value="maturity"
-                className="flex items-center gap-2"
-              >
-                {getTabIcon("maturity", reportStatus.maturity)}
-                Maturity
-              </TabsTrigger>
-              <TabsTrigger
-                value="sensitivity"
-                className="flex items-center gap-2"
-              >
-                {getTabIcon("sensitivity", reportStatus.sensitivity)}
-                Sensitivity Analysis
-              </TabsTrigger>
-            </TabsList>
+          {/* Reports Section with Side Navigation */}
+          <div className="flex gap-6">
+            {/* Reports Side Navigation */}
+            <div className="w-80 flex-shrink-0">
+              <Card className="bg-white shadow-lg border-0 sticky top-6">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-slate-800">Reports</CardTitle>
+                  <CardDescription>Navigate between different report sections</CardDescription>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <nav className="space-y-1">
+                    {[
+                      { key: "disclosure", label: "Disclosure", sublabel: "IAS 19", icon: FileText },
+                      { key: "comprehensive", label: "Other Comprehensive Income", sublabel: "OCI", icon: PieChart },
+                      { key: "maturity", label: "Maturity", sublabel: "Profile", icon: TrendingUp },
+                      { key: "sensitivity", label: "Sensitivity Analysis", sublabel: "Parameters", icon: BarChart3 }
+                    ].map((item) => (
+                      <button
+                        key={item.key}
+                        onClick={() => setActiveTab(item.key)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-slate-50 transition-colors ${
+                          activeTab === item.key 
+                            ? "bg-emerald-50 text-emerald-700 border-r-2 border-emerald-600" 
+                            : "text-slate-600"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 flex-1">
+                          {getTabIcon(item.key, reportStatus[item.key as keyof typeof reportStatus])}
+                          <item.icon className="h-4 w-4 flex-shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <div className="text-sm font-medium truncate">{item.label}</div>
+                            <div className="text-xs text-slate-500">{item.sublabel}</div>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </nav>
+                </CardContent>
+              </Card>
+            </div>
 
-            <TabsContent value="disclosure">
-              <DisclosureReport />
-            </TabsContent>
-
-            <TabsContent value="comprehensive">
-              {reportStatus.comprehensive === "completed" ? (
-                <OtherComprehensiveReport />
-              ) : (
-                <Card className="bg-white shadow-lg border-0">
-                  <CardContent className="p-12 text-center">
-                    <div className="max-w-md mx-auto">
-                      {reportStatus.comprehensive === "loading" ? (
-                        <>
-                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Generating Other Comprehensive Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.comprehensive.description}
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Other Comprehensive Income (OCI) Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.comprehensive.description}
-                          </p>
-                          <Button
-                            onClick={() => handleStartReport("comprehensive")}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                          >
-                            <PlayCircle className="h-4 w-4 mr-2" />
-                            Start Report Generation
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+            {/* Report Content */}
+            <div className="flex-1 min-w-0">
+              {activeTab === "disclosure" && <DisclosureReport />}
+              
+              {activeTab === "comprehensive" && (
+                reportStatus.comprehensive === "completed" ? (
+                  <OtherComprehensiveReport />
+                ) : (
+                  <Card className="bg-white shadow-lg border-0">
+                    <CardContent className="p-12 text-center">
+                      <div className="max-w-md mx-auto">
+                        {reportStatus.comprehensive === "loading" ? (
+                          <>
+                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Generating Other Comprehensive Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.comprehensive.description}
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <PieChart className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Other Comprehensive Income (OCI) Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.comprehensive.description}
+                            </p>
+                            <Button
+                              onClick={() => handleStartReport("comprehensive")}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                            >
+                              <PlayCircle className="h-4 w-4 mr-2" />
+                              Start Report Generation
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
               )}
-            </TabsContent>
 
-            <TabsContent value="maturity">
-              {reportStatus.maturity === "completed" ? (
-                <MaturityProfileReport />
-              ) : (
-                <Card className="bg-white shadow-lg border-0">
-                  <CardContent className="p-12 text-center">
-                    <div className="max-w-md mx-auto">
-                      {reportStatus.maturity === "loading" ? (
-                        <>
-                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Generating Maturity Profile Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.maturity.description}
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <TrendingUp className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Maturity Profile Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.maturity.description}
-                          </p>
-                          <Button
-                            onClick={() => handleStartReport("maturity")}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                          >
-                            <PlayCircle className="h-4 w-4 mr-2" />
-                            Start Report Generation
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+              {activeTab === "maturity" && (
+                reportStatus.maturity === "completed" ? (
+                  <MaturityProfileReport />
+                ) : (
+                  <Card className="bg-white shadow-lg border-0">
+                    <CardContent className="p-12 text-center">
+                      <div className="max-w-md mx-auto">
+                        {reportStatus.maturity === "loading" ? (
+                          <>
+                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Generating Maturity Profile Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.maturity.description}
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <TrendingUp className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Maturity Profile Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.maturity.description}
+                            </p>
+                            <Button
+                              onClick={() => handleStartReport("maturity")}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                            >
+                              <PlayCircle className="h-4 w-4 mr-2" />
+                              Start Report Generation
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
               )}
-            </TabsContent>
 
-            <TabsContent value="sensitivity">
-              {reportStatus.sensitivity === "completed" ? (
-                <SensitivityAnalysisReport />
-              ) : (
-                <Card className="bg-white shadow-lg border-0">
-                  <CardContent className="p-12 text-center">
-                    <div className="max-w-md mx-auto">
-                      {reportStatus.sensitivity === "loading" ? (
-                        <>
-                          <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Generating Sensitivity Analysis Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.sensitivity.description}
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
-                          <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                            Sensitivity Analysis Report
-                          </h3>
-                          <p className="text-slate-600 mb-6">
-                            {reportTimeEstimates.sensitivity.description}
-                          </p>
-                          <Button
-                            onClick={() => handleStartReport("sensitivity")}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                          >
-                            <PlayCircle className="h-4 w-4 mr-2" />
-                            Start Report Generation
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+              {activeTab === "sensitivity" && (
+                reportStatus.sensitivity === "completed" ? (
+                  <SensitivityAnalysisReport />
+                ) : (
+                  <Card className="bg-white shadow-lg border-0">
+                    <CardContent className="p-12 text-center">
+                      <div className="max-w-md mx-auto">
+                        {reportStatus.sensitivity === "loading" ? (
+                          <>
+                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Generating Sensitivity Analysis Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.sensitivity.description}
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <BarChart3 className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Sensitivity Analysis Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              {reportTimeEstimates.sensitivity.description}
+                            </p>
+                            <Button
+                              onClick={() => handleStartReport("sensitivity")}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                            >
+                              <PlayCircle className="h-4 w-4 mr-2" />
+                              Start Report Generation
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
               )}
-            </TabsContent>
-          </Tabs>
+            </div>
+          </div>
         </div>
       </div>
     );
