@@ -35,6 +35,8 @@ import {
   Calculator,
   FileSpreadsheet,
   Timer,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DisclosureReport } from "@/components/reports/DisclosureReport";
@@ -47,6 +49,7 @@ const Index = () => {
   const [showOutput, setShowOutput] = useState(false);
   const [activeTab, setActiveTab] = useState("disclosure");
   const [activeMenuItem, setActiveMenuItem] = useState("Runtime");
+  const [isReportsCollapsed, setIsReportsCollapsed] = useState(false);
   const [reportStatus, setReportStatus] = useState({
     disclosure: "completed",
     sensitivity: "pending",
@@ -318,11 +321,29 @@ const Index = () => {
           {/* Reports Section with Side Navigation */}
           <div className="flex gap-6">
             {/* Reports Side Navigation */}
-            <div className="w-80 flex-shrink-0">
+            <div className={`${isReportsCollapsed ? 'w-16' : 'w-80'} flex-shrink-0 transition-all duration-300`}>
               <Card className="bg-white shadow-lg border-0 sticky top-6">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-slate-800">Reports</CardTitle>
-                  <CardDescription>Navigate between different report sections</CardDescription>
+                  <div className="flex items-center justify-between">
+                    {!isReportsCollapsed && (
+                      <div>
+                        <CardTitle className="text-lg text-slate-800">Reports</CardTitle>
+                        <CardDescription>Navigate between different report sections</CardDescription>
+                      </div>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setIsReportsCollapsed(!isReportsCollapsed)}
+                      className="h-8 w-8 p-0 flex-shrink-0"
+                    >
+                      {isReportsCollapsed ? (
+                        <ChevronRight className="h-4 w-4" />
+                      ) : (
+                        <ChevronLeft className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent className="p-0">
                   <nav className="space-y-1">
@@ -340,14 +361,17 @@ const Index = () => {
                             ? "bg-emerald-50 text-emerald-700 border-r-2 border-emerald-600" 
                             : "text-slate-600"
                         }`}
+                        title={isReportsCollapsed ? item.label : undefined}
                       >
                         <div className="flex items-center gap-3 flex-1">
                           {getTabIcon(item.key, reportStatus[item.key as keyof typeof reportStatus])}
                           <item.icon className="h-4 w-4 flex-shrink-0" />
-                          <div className="min-w-0 flex-1">
-                            <div className="text-sm font-medium truncate">{item.label}</div>
-                            <div className="text-xs text-slate-500">{item.sublabel}</div>
-                          </div>
+                          {!isReportsCollapsed && (
+                            <div className="min-w-0 flex-1">
+                              <div className="text-sm font-medium truncate">{item.label}</div>
+                              <div className="text-xs text-slate-500">{item.sublabel}</div>
+                            </div>
+                          )}
                         </div>
                       </button>
                     ))}
