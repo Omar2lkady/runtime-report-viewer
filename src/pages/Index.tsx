@@ -195,62 +195,88 @@ const Index = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-              {/* PVDBO_T_BA */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* PVDBO_T Comparison */}
               <Card className="bg-white shadow-lg border-0">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg text-slate-800">
-                    PVDBO_T_BA
+                    Present Value of DBO
                   </CardTitle>
                   <CardDescription>
-                    Present value of defined benefit obligation
+                    Total present value of defined benefit obligation
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-gradient-to-r from-cyan-50 to-cyan-100 rounded-lg">
                     <div>
                       <div className="text-sm text-cyan-700 font-medium">
                         Current
                       </div>
                       <div className="text-xl font-bold text-cyan-800">
-                        770,521.22
+                        875,395,402.84
                       </div>
                     </div>
                     <div className="text-cyan-600">
                       <TrendingUp className="h-6 w-6" />
                     </div>
                   </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <div>
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
+                      </div>
+                      <div className="text-xl font-bold text-slate-700">
+                        675,385,402.84
+                      </div>
+                    </div>
+                    <div className="text-emerald-600 text-sm font-semibold">
+                      +29.6%
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              {/* Service Cost_T */}
+              {/* Service Cost Comparison */}
               <Card className="bg-white shadow-lg border-0">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg text-slate-800">
-                    Service Cost_T
+                    Service Cost
                   </CardTitle>
                   <CardDescription>
                     Current and past service cost totals
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
                     <div>
                       <div className="text-sm text-emerald-700 font-medium">
                         Current
                       </div>
                       <div className="text-xl font-bold text-emerald-800">
-                        43,300.14
+                        207,894,356.63
                       </div>
                     </div>
                     <div className="text-emerald-600">
                       <BarChart3 className="h-6 w-6" />
                     </div>
                   </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <div>
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
+                      </div>
+                      <div className="text-xl font-bold text-slate-700">
+                        247,894,356.63
+                      </div>
+                    </div>
+                    <div className="text-red-600 text-sm font-semibold">
+                      -16.1%
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              {/* Total Employees */}
+              {/* Employee Count Comparison */}
               <Card className="bg-white shadow-lg border-0">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg text-slate-800">
@@ -260,72 +286,31 @@ const Index = () => {
                     Active employee count in the plan
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg">
                     <div>
                       <div className="text-sm text-amber-700 font-medium">
                         Current
                       </div>
                       <div className="text-xl font-bold text-amber-800">
-                        5
+                        20,001
                       </div>
                     </div>
                     <div className="text-amber-600">
                       <PieChart className="h-6 w-6" />
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* PVADV_T */}
-              <Card className="bg-white shadow-lg border-0">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-slate-800">
-                    PVADV_T
-                  </CardTitle>
-                  <CardDescription>
-                    Present value of advance payments
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg">
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
                     <div>
-                      <div className="text-sm text-orange-700 font-medium">
-                        Current
+                      <div className="text-sm text-slate-600 font-medium">
+                        Last
                       </div>
-                      <div className="text-xl font-bold text-orange-800">
-                        60,500.01
-                      </div>
-                    </div>
-                    <div className="text-orange-600">
-                      <Calculator className="h-6 w-6" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* PVDBO_Advanced Paid_T */}
-              <Card className="bg-white shadow-lg border-0">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg text-slate-800">
-                    PVDBO_Advanced Paid_T
-                  </CardTitle>
-                  <CardDescription>
-                    Present value of advanced paid benefits
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg">
-                    <div>
-                      <div className="text-sm text-purple-700 font-medium">
-                        Current
-                      </div>
-                      <div className="text-xl font-bold text-purple-800">
-                        710,021.21
+                      <div className="text-xl font-bold text-slate-700">
+                        20,501
                       </div>
                     </div>
-                    <div className="text-purple-600">
-                      <FileSpreadsheet className="h-6 w-6" />
+                    <div className="text-red-600 text-sm font-semibold">
+                      -2.4%
                     </div>
                   </div>
                 </CardContent>
