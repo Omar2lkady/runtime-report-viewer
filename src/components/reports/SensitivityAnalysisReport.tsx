@@ -34,50 +34,9 @@ export const SensitivityAnalysisReport = () => {
         </CardHeader>
         <CardContent className="p-6">
           <div className="space-y-8">
-            {/* Duration Section */}
-            <div className="space-y-3">
-              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">1. Duration</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">2022</div>
-                <div className="text-slate-700 py-2 px-3">Duration (years)</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">6.83</div>
-              </div>
-            </div>
-
-            {/* Experience Adjustment Section */}
-            <div className="space-y-3">
-              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">2. Experience Adjustment</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Amounts in SAR 2022</div>
-                
-                <div className="text-slate-700 py-2 px-3">Present Value of Defined Benefit Obligation</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">48,284</div>
-                
-                <div className="text-slate-700 py-2 px-3">Fair Value of any Plan assets</div>
-                <div className="text-center font-mono py-2 px-3">-</div>
-                
-                <div className="text-slate-700 py-2 px-3">Benefits Payable to Outgoing Employees</div>
-                <div className="text-center font-mono py-2 px-3">-</div>
-                
-                <div className="font-bold text-slate-800 py-2 px-3 bg-slate-200 rounded">Net Defined Benefit Liability</div>
-                <div className="text-center font-mono font-bold py-2 px-3 bg-slate-200 rounded">48,284</div>
-                
-                <div className="text-slate-700 py-2 px-3">Remeasurement (Gain)/Loss on Obligation</div>
-                <div className="text-center font-mono py-2 px-3">-</div>
-                
-                <div className="text-slate-700 py-2 px-3">Remeasurement (Gain)/Loss on Plan Asset</div>
-                <div className="text-center font-mono py-2 px-3">-</div>
-                
-                <div className="font-bold text-slate-800 py-2 px-3 bg-yellow-100 rounded">Other Comprehensive Income</div>
-                <div className="text-center font-mono font-bold py-2 px-3 bg-yellow-100 rounded">-</div>
-              </div>
-            </div>
-
             {/* Sensitivity Analysis Section */}
             <div className="space-y-3">
-              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">3. Sensitivity Analysis</h4>
+              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">Sensitivity Analysis</h4>
               <div className="grid grid-cols-5 gap-4">
                 <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
                 <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Current PVDBO</div>
