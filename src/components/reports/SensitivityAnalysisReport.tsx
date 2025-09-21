@@ -34,69 +34,90 @@ export const SensitivityAnalysisReport = () => {
         </CardHeader>
         <CardContent className="p-6">
           <div className="space-y-8">
+            {/* Duration Section */}
+            <div className="space-y-3">
+              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">1. Duration</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
+                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">2022</div>
+                <div className="text-slate-700 py-2 px-3">Duration (years)</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">6.83</div>
+              </div>
+            </div>
+
+            {/* Experience Adjustment Section */}
+            <div className="space-y-3">
+              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">2. Experience Adjustment</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
+                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Amounts in SAR 2022</div>
+                
+                <div className="text-slate-700 py-2 px-3">Present Value of Defined Benefit Obligation</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">48,284</div>
+                
+                <div className="text-slate-700 py-2 px-3">Fair Value of any Plan assets</div>
+                <div className="text-center font-mono py-2 px-3">-</div>
+                
+                <div className="text-slate-700 py-2 px-3">Benefits Payable to Outgoing Employees</div>
+                <div className="text-center font-mono py-2 px-3">-</div>
+                
+                <div className="font-bold text-slate-800 py-2 px-3 bg-slate-200 rounded">Net Defined Benefit Liability</div>
+                <div className="text-center font-mono font-bold py-2 px-3 bg-slate-200 rounded">48,284</div>
+                
+                <div className="text-slate-700 py-2 px-3">Remeasurement (Gain)/Loss on Obligation</div>
+                <div className="text-center font-mono py-2 px-3">-</div>
+                
+                <div className="text-slate-700 py-2 px-3">Remeasurement (Gain)/Loss on Plan Asset</div>
+                <div className="text-center font-mono py-2 px-3">-</div>
+                
+                <div className="font-bold text-slate-800 py-2 px-3 bg-yellow-100 rounded">Other Comprehensive Income</div>
+                <div className="text-center font-mono font-bold py-2 px-3 bg-yellow-100 rounded">-</div>
+              </div>
+            </div>
+
             {/* Sensitivity Analysis Section */}
             <div className="space-y-3">
-              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">Sensitivity Analysis</h4>
-              <div className="grid grid-cols-5 gap-4">
+              <h4 className="font-bold text-slate-800 text-lg border-b pb-2">3. Sensitivity Analysis</h4>
+              <div className="grid grid-cols-3 gap-4">
                 <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded">Particulars</div>
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Current PVDBO</div>
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Percentage Change</div>
-                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Last PVDBO</div>
+                <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">PVDBO (Amounts in SAR)</div>
                 <div className="font-medium text-slate-700 bg-slate-100 py-2 px-3 rounded text-center">Percentage Change</div>
                 
                 <div className="text-slate-700 py-2 px-3">Current Liability</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,150,497</div>
-                <div className="text-center font-mono py-2 px-3">-</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,145,296</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">48,284</div>
                 <div className="text-center font-mono py-2 px-3">-</div>
                 
                 <div className="text-slate-700 py-2 px-3">+1% Discount Rate</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">3,903,619</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-5.95%</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">3,897,471</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-5.98%</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">45,167</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-6.46%</div>
                 
                 <div className="text-slate-700 py-2 px-3">-1% Discount Rate</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">4,488,033</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">8.13%</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">4,427,283</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">6.80%</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">51,759</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">7.20%</div>
                 
                 <div className="text-slate-700 py-2 px-3">+1% Salary Increase Rate</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">4,534,687</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">9.26%</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">4,481,419</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">8.11%</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">51,972</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">7.64%</div>
                 
                 <div className="text-slate-700 py-2 px-3">-1% Salary Increase Rate</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">3,854,973</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-7.12%</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">3,842,192</div>
-                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-7.31%</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">44,921</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-6.96%</div>
                 
                 <div className="text-slate-700 py-2 px-3">+10% Withdrawal Rates</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,183,048</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.78%</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,145,462</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.00%</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">44,733</div>
+                <div className="text-center font-mono py-2 px-3 bg-green-50 rounded">-7.35%</div>
                 
                 <div className="text-slate-700 py-2 px-3">-10% Withdrawal Rates</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,167,610</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.41%</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,145,127</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.00%</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">52,520</div>
+                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">8.36%</div>
                 
                 <div className="text-slate-700 py-2 px-3">1 Year Mortality age set back</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,175,287</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.60%</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,159,055</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.33%</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">48,285</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.00%</div>
                 
                 <div className="text-slate-700 py-2 px-3">1 Year Mortality age set forward</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,175,871</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.61%</div>
-                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">4,131,205</div>
-                <div className="text-center font-mono py-2 px-3 bg-red-50 rounded">-0.34%</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">48,283</div>
+                <div className="text-center font-mono py-2 px-3 bg-blue-50 rounded">0.00%</div>
               </div>
             </div>
           </div>
