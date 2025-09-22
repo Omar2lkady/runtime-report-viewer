@@ -177,11 +177,21 @@ const Index = () => {
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                 Export
               </Button>
-            </div>
           </div>
+        </div>
 
+        {/* View Data Details Button */}
+        <div className="mb-8 flex justify-end">
+          <Button
+            onClick={handleViewDataDetails}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            View Data Details
+          </Button>
+        </div>
 
-          {/* Reports Section with Side Navigation */}
+        {/* Reports Section with Side Navigation */}
           <div className="flex gap-6">
             {/* Reports Side Navigation */}
             <div className={`${isReportsCollapsed ? 'w-16' : 'w-80'} flex-shrink-0 transition-all duration-300`}>
