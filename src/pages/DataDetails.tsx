@@ -298,6 +298,78 @@ const DataDetails = () => {
           </Button>
         </div>
 
+        {/* Summary Information Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Current Dataset Information */}
+          <Card className="bg-white shadow-lg border border-slate-200">
+            <CardHeader>
+              <CardTitle className="text-lg text-slate-800">Current dataset information</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between">
+                <span className="font-medium text-slate-600">Dataset Name:</span>
+                <span className="text-slate-800">GOSI2</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-slate-600">Current Valuation date:</span>
+                <span className="text-slate-800">31-12-2024</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Factors Details */}
+          <Card className="bg-white shadow-lg border border-slate-200">
+            <CardHeader>
+              <CardTitle className="text-lg text-slate-800">Factors Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between">
+                <span className="font-medium text-slate-600">First Cap:</span>
+                <span className="text-slate-800">5.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-slate-600">First Factor:</span>
+                <span className="text-slate-800">15/30</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-slate-600">Second Factor:</span>
+                <span className="text-slate-800">30/30</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Key Financial Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card className="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg">
+            <CardContent className="p-6">
+              <div className="text-sm font-medium opacity-90">PVDBO_T_BA</div>
+              <div className="text-2xl font-bold">6,030,195.58</div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg">
+            <CardContent className="p-6">
+              <div className="text-sm font-medium opacity-90">Service Cost_T</div>
+              <div className="text-2xl font-bold">385,349.77</div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg">
+            <CardContent className="p-6">
+              <div className="text-sm font-medium opacity-90">PVADV_T</div>
+              <div className="text-2xl font-bold">788,163.22</div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">
+            <CardContent className="p-6">
+              <div className="text-sm font-medium opacity-90">PVDBO_Advanced Paid_T</div>
+              <div className="text-2xl font-bold">5,242,032.36</div>
+            </CardContent>
+          </Card>
+        </div>
+
         <Tabs defaultValue="current" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 bg-white border-2 border-slate-200 shadow-sm p-1 rounded-lg">
             <TabsTrigger 
