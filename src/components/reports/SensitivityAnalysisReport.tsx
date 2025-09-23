@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Download } from "lucide-react";
 
 export const SensitivityAnalysisReport = () => {
@@ -34,89 +35,85 @@ export const SensitivityAnalysisReport = () => {
         </CardHeader>
         <CardContent className="p-6">
           <div className="space-y-6">
-            <h4 className="font-bold text-slate-800 text-lg border-b pb-2">Sensitivity Analysis</h4>
+            <h4 className="font-bold text-slate-800 text-lg text-center border-b pb-2">Sensitivity Analysis</h4>
             
-            {/* Sensitivity Analysis Table */}
-            <div className="flex gap-4">
-              {/* Particulars Column */}
-              <div className="flex-1">
-                <div className="font-medium text-slate-700 bg-slate-100 py-3 px-4 border border-slate-300 text-center">
-                  Particulars
-                </div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">Current Liability</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">+1% Discount Rate</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">-1% Discount Rate</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">+1% Salary Increase Rate</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">-1% Salary Increase Rate</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">+10% Withdrawal Rates</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">-10% Withdrawal Rates</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">1 Year Mortality age set back</div>
-                <div className="text-slate-700 py-3 px-4 border border-slate-300">1 Year Mortality age set forward</div>
-              </div>
-
-              {/* Current PVDBO Column */}
-              <div className="flex-1">
-                <div className="font-medium text-slate-700 bg-slate-100 py-3 px-4 border border-slate-300 text-center">
-                  Current PVDBO
-                </div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,150,497</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">3,903,619</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,488,033</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,534,687</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">3,854,973</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,183,048</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,167,610</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,175,287</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,175,871</div>
-              </div>
-
-              {/* Current Percentage Change Column */}
-              <div className="flex-1">
-                <div className="font-medium text-slate-700 bg-slate-100 py-3 px-4 border border-slate-300 text-center">
-                  Percentage Change
-                </div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-5.95%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">8.13%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">9.26%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-7.12%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.78%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.41%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.60%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.61%</div>
-              </div>
-
-              {/* Last PVDBO Column */}
-              <div className="flex-1">
-                <div className="font-medium text-slate-700 bg-slate-100 py-3 px-4 border border-slate-300 text-center">
-                  Last PVDBO
-                </div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,145,296</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">3,897,471</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,427,283</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,481,419</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">3,842,192</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,145,462</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,145,127</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,159,055</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">4,131,205</div>
-              </div>
-
-              {/* Last Percentage Change Column */}
-              <div className="flex-1">
-                <div className="font-medium text-slate-700 bg-slate-100 py-3 px-4 border border-slate-300 text-center">
-                  Percentage Change
-                </div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-5.98%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">6.80%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">8.11%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-7.31%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.00%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.00%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">0.33%</div>
-                <div className="text-center font-mono py-3 px-4 border border-slate-300">-0.34%</div>
-              </div>
+            <div className="overflow-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-center font-semibold">Particulars</TableHead>
+                    <TableHead className="text-center font-semibold">Current PVDBO</TableHead>
+                    <TableHead className="text-center font-semibold">Percentage Change</TableHead>
+                    <TableHead className="text-center font-semibold">Last PVDBO</TableHead>
+                    <TableHead className="text-center font-semibold">Percentage Change</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">Current Liability</TableCell>
+                    <TableCell className="text-right font-mono">4,150,497</TableCell>
+                    <TableCell className="text-center font-mono">-</TableCell>
+                    <TableCell className="text-right font-mono">4,145,296</TableCell>
+                    <TableCell className="text-center font-mono">-</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">+1% Discount Rate</TableCell>
+                    <TableCell className="text-right font-mono">3,903,619</TableCell>
+                    <TableCell className="text-center font-mono">-5.95%</TableCell>
+                    <TableCell className="text-right font-mono">3,897,471</TableCell>
+                    <TableCell className="text-center font-mono">-5.98%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">-1% Discount Rate</TableCell>
+                    <TableCell className="text-right font-mono">4,488,033</TableCell>
+                    <TableCell className="text-center font-mono">8.13%</TableCell>
+                    <TableCell className="text-right font-mono">4,427,283</TableCell>
+                    <TableCell className="text-center font-mono">6.80%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">+1% Salary Increase Rate</TableCell>
+                    <TableCell className="text-right font-mono">4,534,687</TableCell>
+                    <TableCell className="text-center font-mono">9.26%</TableCell>
+                    <TableCell className="text-right font-mono">4,481,419</TableCell>
+                    <TableCell className="text-center font-mono">8.11%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">-1% Salary Increase Rate</TableCell>
+                    <TableCell className="text-right font-mono">3,854,973</TableCell>
+                    <TableCell className="text-center font-mono">-7.12%</TableCell>
+                    <TableCell className="text-right font-mono">3,842,192</TableCell>
+                    <TableCell className="text-center font-mono">-7.31%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">+10% Withdrawal Rates</TableCell>
+                    <TableCell className="text-right font-mono">4,183,048</TableCell>
+                    <TableCell className="text-center font-mono">0.78%</TableCell>
+                    <TableCell className="text-right font-mono">4,145,462</TableCell>
+                    <TableCell className="text-center font-mono">0.00%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">-10% Withdrawal Rates</TableCell>
+                    <TableCell className="text-right font-mono">4,167,610</TableCell>
+                    <TableCell className="text-center font-mono">0.41%</TableCell>
+                    <TableCell className="text-right font-mono">4,145,127</TableCell>
+                    <TableCell className="text-center font-mono">0.00%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">1 Year Mortality age set back</TableCell>
+                    <TableCell className="text-right font-mono">4,175,287</TableCell>
+                    <TableCell className="text-center font-mono">0.60%</TableCell>
+                    <TableCell className="text-right font-mono">4,159,055</TableCell>
+                    <TableCell className="text-center font-mono">0.33%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">1 Year Mortality age set forward</TableCell>
+                    <TableCell className="text-right font-mono">4,175,871</TableCell>
+                    <TableCell className="text-center font-mono">0.61%</TableCell>
+                    <TableCell className="text-right font-mono">4,131,205</TableCell>
+                    <TableCell className="text-center font-mono">-0.34%</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </div>
           </div>
         </CardContent>
