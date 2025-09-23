@@ -115,6 +115,29 @@ export const SensitivityAnalysisReport = () => {
                 </TableBody>
               </Table>
             </div>
+
+            <div className="space-y-4 mt-8">
+              <h4 className="font-bold text-slate-800 text-lg text-center border-b pb-2">Duration</h4>
+              
+              <div className="overflow-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-b-2 border-slate-300 bg-slate-50">
+                      <TableHead className="text-center font-semibold text-slate-700 w-1/3">Particulars</TableHead>
+                      <TableHead className="text-center font-semibold text-slate-700 w-1/3">Current</TableHead>
+                      <TableHead className="text-center font-semibold text-slate-700 w-1/3">Last</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow className="border-b border-slate-200 hover:bg-slate-50/50">
+                      <TableCell className="font-medium text-slate-800 py-3">Duration - years</TableCell>
+                      <TableCell className="text-right font-mono text-slate-700 py-3">7.04</TableCell>
+                      <TableCell className="text-right font-mono text-slate-700 py-3">6.39</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
