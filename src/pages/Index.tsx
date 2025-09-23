@@ -43,6 +43,7 @@ import { DisclosureReport } from "@/components/reports/DisclosureReport";
 import { SensitivityAnalysisReport } from "@/components/reports/SensitivityAnalysisReport";
 import { MaturityProfileReport } from "@/components/reports/MaturityProfileReport";
 import { OtherComprehensiveReport } from "@/components/reports/OtherComprehensiveReport";
+import { LiabilityMovementReport } from "@/components/reports/LiabilityMovementReport";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -51,7 +52,8 @@ const Index = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("Runtime");
   const [isReportsCollapsed, setIsReportsCollapsed] = useState(false);
   const [reportStatus, setReportStatus] = useState({
-    disclosure: "completed",
+    liability: "completed",
+    disclosure: "pending",
     sensitivity: "pending",
     maturity: "pending",
     comprehensive: "pending",
@@ -126,7 +128,7 @@ const Index = () => {
       formData.calculationBase !== ""
     ) {
       setShowOutput(true);
-      setActiveTab("disclosure");
+      setActiveTab("liability");
     }
   };
 
@@ -218,6 +220,7 @@ const Index = () => {
                 <CardContent className="p-0">
                   <nav className="space-y-1">
                     {[
+                      { key: "liability", label: "Liability Movement", sublabel: "Movement", icon: FileText },
                       { key: "disclosure", label: "Disclosure", sublabel: "IAS 19", icon: FileText },
                       { key: "comprehensive", label: "Other Comprehensive Income", sublabel: "OCI", icon: PieChart },
                       { key: "maturity", label: "Maturity", sublabel: "Profile", icon: TrendingUp },
@@ -252,7 +255,48 @@ const Index = () => {
 
             {/* Report Content */}
             <div className="flex-1 min-w-0">
-              {activeTab === "disclosure" && <DisclosureReport />}
+              {activeTab === "liability" && <LiabilityMovementReport />}
+              
+              {activeTab === "disclosure" && (
+                reportStatus.disclosure === "completed" ? (
+                  <DisclosureReport />
+                ) : (
+                  <Card className="bg-white shadow-lg border-0">
+                    <CardContent className="p-12 text-center">
+                      <div className="max-w-md mx-auto">
+                        {reportStatus.disclosure === "loading" ? (
+                          <>
+                            <Loader2 className="h-16 w-16 mx-auto text-blue-600 animate-spin mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Generating Disclosure Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              Processing disclosure requirements and compliance data
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <FileText className="h-16 w-16 mx-auto text-amber-500 mb-6" />
+                            <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                              Disclosure Report
+                            </h3>
+                            <p className="text-slate-600 mb-6">
+                              Generate comprehensive disclosure documentation and compliance reports
+                            </p>
+                            <Button
+                              onClick={() => handleStartReport("disclosure")}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                            >
+                              <PlayCircle className="h-4 w-4 mr-2" />
+                              Start Report Generation
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
+              )}
               
               {activeTab === "comprehensive" && (
                 reportStatus.comprehensive === "completed" ? (
